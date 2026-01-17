@@ -101,7 +101,7 @@ export class AuthManager<Schema extends ReturnType<typeof createSubjects>> {
       case "/authorize":
         return this.authorize();
       case "/":
-        return this.verify({ request, subjects: this.props.verify.subjects });
+        return this.verify(request);
       default:
         return new Response("Not Found", { status: 404 });
     }
@@ -137,18 +137,12 @@ export class AuthManager<Schema extends ReturnType<typeof createSubjects>> {
     );
   }
 
-  private async verify({
-    request,
-    subjects,
-  }: {
-    request: Request;
-    subjects: Schema;
-  }) {
+  private async verify(request: Request) {
     const cookies = new URLSearchParams(
       request.headers.get("cookie")?.replaceAll("; ", "&"),
     );
     const verified = await this.client.verify<Schema>(
-      subjects,
+      this.props.verify.subjects,
       cookies.get("access_token")!,
       {
         refresh: cookies.get("refresh_token") || undefined,
