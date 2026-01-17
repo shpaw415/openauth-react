@@ -103,7 +103,7 @@ export class AuthManager<Schema extends ReturnType<typeof createSubjects>> {
       case "/":
         return this.verify({ request, subjects: this.props.verify.subjects });
       default:
-        throw new Error("Invalid path for AuthManager");
+        return new Response("Not Found", { status: 404 });
     }
   }
 
