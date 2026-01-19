@@ -34,7 +34,11 @@ export type AuthManagerProps<Schema extends ReturnType<typeof createSubjects>> =
      * ```
      */
     callback: callbackHandlerProps;
-
+    /**
+     * Public path for the endpoint.
+     * @default "/auth"
+     */
+    publicPath?: string;
     verify: {
       /**
        * Create a subject schema.
@@ -88,19 +92,21 @@ export class AuthManager<Schema extends ReturnType<typeof createSubjects>> {
     callback: Omit<callbackHandlerProps, "request">;
     verify: AuthManagerProps<Schema>["verify"];
   };
+  publicPath: string;
   constructor(props: AuthManagerProps<Schema>) {
     this.client = props.client;
     this.redirectURI = props.issuer + "/callback";
     this.props = { callback: props.callback, verify: props.verify };
+    this.publicPath = props.publicPath ?? "/auth";
   }
 
   public run(request: Request) {
     switch (new URL(request.url).pathname) {
-      case "/callback":
+      case `${this.publicPath}/callback`:
         return this.callback({ ...this.props.callback, request });
-      case "/authorize":
+      case `${this.publicPath}/authorize`:
         return this.authorize();
-      case "/":
+      case `${this.publicPath}`:
         return this.verify(request);
       default:
         return new Response("Not Found", { status: 404 });

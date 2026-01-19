@@ -1,11 +1,4 @@
-import {
-  useRef,
-  useState,
-  type ReactNode,
-  useEffect,
-  useContext,
-  createContext,
-} from "react";
+import { useRef, useState, useEffect, useContext, createContext } from "react";
 import { createClient } from "@openauthjs/openauth/client";
 import type { AuthContextType, AuthProviderProps } from "./types";
 
@@ -111,7 +104,7 @@ export function AuthProvider({
   }
 
   async function user() {
-    const res = await fetch("http://localhost:3001/", {
+    const res = await fetch("http://localhost:3001/auth", {
       headers: {
         Authorization: `Bearer ${token.current}`,
       },
@@ -126,8 +119,7 @@ export function AuthProvider({
   function logout() {
     localStorage.removeItem("refresh");
     token.current = undefined;
-
-    window.location.replace("/");
+    setLoggedIn(false);
   }
 
   return (
