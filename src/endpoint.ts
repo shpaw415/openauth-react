@@ -9,7 +9,6 @@ import { createSubjects } from "@openauthjs/openauth/subject";
 export type AuthManagerProps<Schema extends ReturnType<typeof createSubjects>> =
   {
     client: Client;
-    request: Request;
     issuer: string;
     /**
      * Callback handler for processing the OAuth2 callback.
