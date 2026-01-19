@@ -33,7 +33,7 @@ export type AuthManagerProps<Schema extends ReturnType<typeof createSubjects>> =
      * }
      * ```
      */
-    callback: callbackHandlerProps;
+    callback: Omit<callbackHandlerProps, "request">;
     /**
      * Public path for the endpoint.
      * @default "/auth"
