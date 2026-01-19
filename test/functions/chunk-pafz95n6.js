@@ -35,7 +35,12 @@ class AuthManager {
         return new Response("Not Found", { status: 404 });
     }
   }
-  async callback({ onError, onSuccess, request, ...props }) {
+  async callback({
+    onError,
+    onSuccess,
+    request,
+    ...props
+  }) {
     const url = new URL(request.url);
     const code = url.searchParams.get("code");
     console.log("Received code:", code);

@@ -25,7 +25,7 @@ const doProxyFetch = async (req: Bun.BunRequest<string>) => {
 
 export default {
   HTTPServer: {
-    port: 3002,
+    port: 3001,
   },
   plugins: [
     ReactToHtml({

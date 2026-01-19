@@ -2,12 +2,13 @@ import {
   AuthManager,
   client,
   subjects
-} from "../chunk-fxemzh4g.js";
+} from "../chunk-pafz95n6.js";
 
 // src/api/auth/[action].ts
 "no action";
 var onRequest = (ctx) => new AuthManager({
   issuer: "http://localhost:8787",
+  redirectURI: "http://localhost:3001/",
   client,
   publicPath: "/auth",
   callback: {

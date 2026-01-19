@@ -81,7 +81,9 @@ export function AuthProvider({
 
   async function login() {
     const { challenge, url } = await client.authorize(
-      location.origin + `${publicPath}/callback`,
+      publicPath.startsWith("http")
+        ? publicPath + "/callback"
+        : location.origin + `${publicPath}/callback`,
       "code",
       {
         pkce: isFrontendCallback,
