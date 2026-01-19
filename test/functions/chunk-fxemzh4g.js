@@ -15,9 +15,11 @@ class AuthManager {
   redirectURI;
   props;
   publicPath;
+  issuer;
   constructor(props) {
     this.client = props.client;
-    this.redirectURI = props.issuer + "/callback";
+    this.issuer = props.issuer;
+    this.redirectURI = props.redirectURI;
     this.props = { callback: props.callback, verify: props.verify };
     this.publicPath = props.publicPath ?? "/auth";
   }
@@ -33,11 +35,13 @@ class AuthManager {
         return new Response("Not Found", { status: 404 });
     }
   }
-  async callback(props) {
-    const { onSuccess, onError } = props;
-    const url = new URL(props.request.url);
+  async callback({ onError, onSuccess, request, ...props }) {
+    const url = new URL(request.url);
     const code = url.searchParams.get("code");
+    console.log("Received code:", code);
     try {
+      if (!code)
+        throw new Error("No code provided");
       const exchanged = await this.client.exchange(code, this.redirectURI);
       if (exchanged.err) {
         throw new Error("Code exchange failed", { cause: exchanged });

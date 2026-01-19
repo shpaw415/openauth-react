@@ -71,6 +71,7 @@ export type AuthManagerProps<Schema extends ReturnType<typeof createSubjects>> =
         error: ExchangeError,
       ) => Response | Promise<Response | void> | void;
     };
+    redirectURI: string;
   };
 
 export type callbackHandlerProps = {
@@ -91,9 +92,11 @@ export class AuthManager<Schema extends ReturnType<typeof createSubjects>> {
     verify: AuthManagerProps<Schema>["verify"];
   };
   publicPath: string;
+  issuer: string;
   constructor(props: AuthManagerProps<Schema>) {
     this.client = props.client;
-    this.redirectURI = props.issuer + "/callback";
+    this.issuer = props.issuer;
+    this.redirectURI = props.redirectURI;
     this.props = { callback: props.callback, verify: props.verify };
     this.publicPath = props.publicPath ?? "/auth";
   }
@@ -111,11 +114,17 @@ export class AuthManager<Schema extends ReturnType<typeof createSubjects>> {
     }
   }
 
-  private async callback(props: callbackHandlerProps) {
-    const { onSuccess, onError } = props;
-    const url = new URL(props.request.url);
-    const code = url.searchParams.get("code")!;
+  private async callback({
+    onError,
+    onSuccess,
+    request,
+    ...props
+  }: callbackHandlerProps) {
+    const url = new URL(request.url);
+    const code = url.searchParams.get("code");
+    console.log("Received code:", code);
     try {
+      if (!code) throw new Error("No code provided");
       const exchanged = await this.client.exchange(code, this.redirectURI);
       if (exchanged.err) {
         throw new Error("Code exchange failed", { cause: exchanged });

@@ -9,6 +9,7 @@ export function AuthProvider({
   clientID,
   issuer,
   publicPath = "/auth",
+  isFrontendCallback = false,
 }: AuthProviderProps) {
   const initializing = useRef(true);
   const [loaded, setLoaded] = useState(false);
@@ -83,7 +84,7 @@ export function AuthProvider({
       location.origin + `${publicPath}/callback`,
       "code",
       {
-        pkce: true,
+        pkce: isFrontendCallback,
       },
     );
     sessionStorage.setItem("challenge", JSON.stringify(challenge));

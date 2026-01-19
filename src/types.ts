@@ -19,6 +19,14 @@ export type AuthProviderProps = {
    * @default "/auth"
    */
   publicPath?: string;
+  /**
+   *  Indicates whether the callback is being handled on the front-end or back-end.
+   *
+   * - `true` front-end callback
+   * - `false` back-end callback
+   * @default false
+   */
+  isFrontendCallback?: boolean;
 };
 
 /**

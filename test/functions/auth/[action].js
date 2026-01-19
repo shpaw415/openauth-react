@@ -2,7 +2,7 @@ import {
   AuthManager,
   client,
   subjects
-} from "../chunk-xvyxt2bp.js";
+} from "../chunk-fxemzh4g.js";
 
 // src/api/auth/[action].ts
 "no action";
@@ -11,7 +11,11 @@ var onRequest = (ctx) => new AuthManager({
   client,
   publicPath: "/auth",
   callback: {
-    onError(error) {},
+    onError(error) {
+      console.log("Callback error:");
+      console.log(error.err);
+      console.log("-".repeat(20));
+    },
     onSuccess(success) {}
   },
   verify: {

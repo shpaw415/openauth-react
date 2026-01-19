@@ -9,7 +9,11 @@ export const onRequest: PagesFunction = (ctx) =>
     client,
     publicPath: "/auth",
     callback: {
-      onError(error) {},
+      onError(error) {
+        console.log("Callback error:");
+        console.log(error.err);
+        console.log("-".repeat(20));
+      },
       onSuccess(success) {},
     },
     verify: {
