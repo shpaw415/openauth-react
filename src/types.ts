@@ -11,6 +11,14 @@ export type AuthProviderProps = {
   children: React.ReactNode;
   clientID: string;
   issuer: string;
+  /**
+   * The public path where the auth endpoints are hosted.
+   *
+   * External example: `http://my.api.com/api/auth`
+   *
+   * @default "/auth"
+   */
+  publicPath?: string;
 };
 
 /**

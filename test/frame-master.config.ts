@@ -6,7 +6,7 @@ import actionPlugin from "frame-master-plugin-cloudflare-pages-functions-action"
 
 export default {
   HTTPServer: {
-    port: 3001,
+    port: 3002,
   },
   plugins: [
     ReactToHtml({
@@ -29,6 +29,7 @@ export default {
     actionPlugin({
       actionBasePath: "src/api",
       outDir: ".frame-master/build",
+      serverPort: 8788,
     }),
     {
       name: "static-assets",

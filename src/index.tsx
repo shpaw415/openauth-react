@@ -8,6 +8,7 @@ export function AuthProvider({
   children,
   clientID,
   issuer,
+  publicPath = "/auth",
 }: AuthProviderProps) {
   const initializing = useRef(true);
   const [loaded, setLoaded] = useState(false);
@@ -39,7 +40,7 @@ export function AuthProvider({
     }
 
     auth();
-  }, []);
+  }, [location.search, location.pathname]);
 
   async function refreshTokens() {
     const refresh = localStorage.getItem("refresh");
@@ -104,7 +105,7 @@ export function AuthProvider({
   }
 
   async function user() {
-    const res = await fetch("http://localhost:3001/auth", {
+    const res = await fetch(`${publicPath}`, {
       headers: {
         Authorization: `Bearer ${token.current}`,
       },

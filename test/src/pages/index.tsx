@@ -13,7 +13,14 @@ function LogComponent() {
 
   return (
     <div>
-      {auth.loggedIn ? <p>Logged in as {auth.userId}</p> : <p>Not logged in</p>}
+      {auth?.loggedIn ? (
+        <p>Logged in as {auth.userId}</p>
+      ) : (
+        <>
+          <p>Not logged in</p>
+          <button onClick={auth?.login}>Login</button>
+        </>
+      )}
     </div>
   );
 }
