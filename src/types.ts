@@ -1,5 +1,5 @@
 export type AuthContextType = {
-  userId?: string;
+  userData?: SessionData;
   loaded: boolean;
   loggedIn: boolean;
   logout: () => void;
@@ -37,6 +37,12 @@ export type AuthProviderProps = {
    * If not provided, the `callbackRedirectURI` URL will be used.
    */
   userInfoEndpoint?: string;
+  /**
+   * UserInfo parser function to transform the fetched user information.
+   *
+   * If not provided, the default session data structure will be used. `res.json()`
+   */
+  userInfoParser?: (data: Response) => SessionData;
 };
 
 /**

@@ -1,7 +1,7 @@
 var __defProp = Object.defineProperty;
 var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
 
-// auth/[action].js
+// chunk-pafz95n6.js
 var __defProp2 = Object.defineProperty;
 var __export = /* @__PURE__ */ __name((target, all) => {
   for (var name in all)
@@ -170,8 +170,8 @@ var JOSEError = class extends Error {
   static {
     __name(this, "JOSEError");
   }
-  constructor(message3, options) {
-    super(message3, options);
+  constructor(message2, options) {
+    super(message2, options);
     this.code = "ERR_JOSE_GENERIC";
     this.name = this.constructor.name;
     Error.captureStackTrace?.(this, this.constructor);
@@ -182,8 +182,8 @@ var JWTClaimValidationFailed = class extends JOSEError {
   static {
     __name(this, "JWTClaimValidationFailed");
   }
-  constructor(message3, payload, claim = "unspecified", reason = "unspecified") {
-    super(message3, { cause: { claim, reason, payload } });
+  constructor(message2, payload, claim = "unspecified", reason = "unspecified") {
+    super(message2, { cause: { claim, reason, payload } });
     this.code = "ERR_JWT_CLAIM_VALIDATION_FAILED";
     this.claim = claim;
     this.reason = reason;
@@ -195,8 +195,8 @@ var JWTExpired = class extends JOSEError {
   static {
     __name(this, "JWTExpired");
   }
-  constructor(message3, payload, claim = "unspecified", reason = "unspecified") {
-    super(message3, { cause: { claim, reason, payload } });
+  constructor(message2, payload, claim = "unspecified", reason = "unspecified") {
+    super(message2, { cause: { claim, reason, payload } });
     this.code = "ERR_JWT_EXPIRED";
     this.claim = claim;
     this.reason = reason;
@@ -228,8 +228,8 @@ var JWEDecryptionFailed = class extends JOSEError {
   static {
     __name(this, "JWEDecryptionFailed");
   }
-  constructor(message3 = "decryption operation failed", options) {
-    super(message3, options);
+  constructor(message2 = "decryption operation failed", options) {
+    super(message2, options);
     this.code = "ERR_JWE_DECRYPTION_FAILED";
   }
 };
@@ -288,8 +288,8 @@ var JWKSNoMatchingKey = class extends JOSEError {
   static {
     __name(this, "JWKSNoMatchingKey");
   }
-  constructor(message3 = "no applicable key found in the JSON Web Key Set", options) {
-    super(message3, options);
+  constructor(message2 = "no applicable key found in the JSON Web Key Set", options) {
+    super(message2, options);
     this.code = "ERR_JWKS_NO_MATCHING_KEY";
   }
 };
@@ -298,8 +298,8 @@ var JWKSMultipleMatchingKeys = class extends JOSEError {
   static {
     __name(this, "JWKSMultipleMatchingKeys");
   }
-  constructor(message3 = "multiple matching keys found in the JSON Web Key Set", options) {
-    super(message3, options);
+  constructor(message2 = "multiple matching keys found in the JSON Web Key Set", options) {
+    super(message2, options);
     this.code = "ERR_JWKS_MULTIPLE_MATCHING_KEYS";
   }
 };
@@ -308,8 +308,8 @@ var JWKSTimeout = class extends JOSEError {
   static {
     __name(this, "JWKSTimeout");
   }
-  constructor(message3 = "request timed out", options) {
-    super(message3, options);
+  constructor(message2 = "request timed out", options) {
+    super(message2, options);
     this.code = "ERR_JWKS_TIMEOUT";
   }
 };
@@ -318,8 +318,8 @@ var JWSSignatureVerificationFailed = class extends JOSEError {
   static {
     __name(this, "JWSSignatureVerificationFailed");
   }
-  constructor(message3 = "signature verification failed", options) {
-    super(message3, options);
+  constructor(message2 = "signature verification failed", options) {
+    super(message2, options);
     this.code = "ERR_JWS_SIGNATURE_VERIFICATION_FAILED";
   }
 };
@@ -422,15 +422,15 @@ function checkSigCryptoKey(key, alg, ...usages) {
   checkUsage(key, usages);
 }
 __name(checkSigCryptoKey, "checkSigCryptoKey");
-function message(msg, actual, ...types3) {
-  types3 = types3.filter(Boolean);
-  if (types3.length > 2) {
-    const last = types3.pop();
-    msg += `one of type ${types3.join(", ")}, or ${last}.`;
-  } else if (types3.length === 2) {
-    msg += `one of type ${types3[0]} or ${types3[1]}.`;
+function message(msg, actual, ...types2) {
+  types2 = types2.filter(Boolean);
+  if (types2.length > 2) {
+    const last = types2.pop();
+    msg += `one of type ${types2.join(", ")}, or ${last}.`;
+  } else if (types2.length === 2) {
+    msg += `one of type ${types2[0]} or ${types2[1]}.`;
   } else {
-    msg += `of type ${types3[0]}.`;
+    msg += `of type ${types2[0]}.`;
   }
   if (actual == null) {
     msg += ` Received ${actual}`;
@@ -444,11 +444,11 @@ function message(msg, actual, ...types3) {
   return msg;
 }
 __name(message, "message");
-var invalid_key_input_default = /* @__PURE__ */ __name((actual, ...types3) => {
-  return message("Key must be ", actual, ...types3);
+var invalid_key_input_default = /* @__PURE__ */ __name((actual, ...types2) => {
+  return message("Key must be ", actual, ...types2);
 }, "invalid_key_input_default");
-function withAlg(alg, actual, ...types3) {
-  return message(`Key for the ${alg} algorithm must be `, actual, ...types3);
+function withAlg(alg, actual, ...types2) {
+  return message(`Key for the ${alg} algorithm must be `, actual, ...types2);
 }
 __name(withAlg, "withAlg");
 var is_key_like_default = /* @__PURE__ */ __name((key) => {
@@ -1363,8 +1363,8 @@ __name(generateVerifier, "generateVerifier");
 async function generateChallenge(verifier, method) {
   if (method === "plain")
     return verifier;
-  const encoder22 = new TextEncoder();
-  const data = encoder22.encode(verifier);
+  const encoder2 = new TextEncoder();
+  const data = encoder2.encode(verifier);
   const hash = await crypto.subtle.digest("SHA-256", data);
   return exports_base64url.encode(new Uint8Array(hash));
 }
@@ -1512,13 +1512,13 @@ function createClient(input) {
         }
       };
     },
-    async verify(subjects3, token, options) {
+    async verify(subjects2, token, options) {
       const jwks = await getJWKS();
       try {
         const result2 = await jwtVerify(token, jwks, {
           issuer
         });
-        const validated = await subjects3[result2.payload.type]["~standard"].validate(result2.payload.properties);
+        const validated = await subjects2[result2.payload.type]["~standard"].validate(result2.payload.properties);
         if (!validated.issues && result2.payload.mode === "access")
           return {
             aud: result2.payload.aud,
@@ -1535,7 +1535,7 @@ function createClient(input) {
           const refreshed = await this.refresh(options.refresh);
           if (refreshed.err)
             return refreshed;
-          const verified = await result.verify(subjects3, refreshed.tokens.access, {
+          const verified = await result.verify(subjects2, refreshed.tokens.access, {
             refresh: refreshed.tokens.refresh,
             issuer,
             fetch: options?.fetch
@@ -1554,8 +1554,8 @@ function createClient(input) {
   return result;
 }
 __name(createClient, "createClient");
-function createSubjects(types22) {
-  return { ...types22 };
+function createSubjects(types2) {
+  return { ...types2 };
 }
 __name(createSubjects, "createSubjects");
 var store$4;
@@ -1744,6 +1744,8 @@ var subjects = createSubjects({
     id: string()
   })
 });
+
+// auth/[action].js
 var onRequest = /* @__PURE__ */ __name((ctx) => new AuthManager({
   issuer: "http://localhost:8787",
   redirectURI: "http://localhost:3001/frontend-auth/callback",
@@ -1772,1752 +1774,10 @@ var onRequest = /* @__PURE__ */ __name((ctx) => new AuthManager({
 }).run(ctx.request), "onRequest");
 
 // auth/index.js
-var __defProp3 = Object.defineProperty;
-var __export2 = /* @__PURE__ */ __name((target, all) => {
-  for (var name in all)
-    __defProp3(target, name, {
-      get: all[name],
-      enumerable: true,
-      configurable: true,
-      set: /* @__PURE__ */ __name((newValue) => all[name] = () => newValue, "set")
-    });
-}, "__export");
-var AuthManager2 = class {
-  static {
-    __name(this, "AuthManager");
-  }
-  client;
-  redirectURI;
-  props;
-  publicPath;
-  issuer;
-  constructor(props) {
-    this.client = props.client;
-    this.issuer = props.issuer;
-    this.redirectURI = props.redirectURI;
-    this.props = { callback: props.callback, verify: props.verify };
-    this.publicPath = props.publicPath ?? "/auth";
-  }
-  run(request) {
-    switch (new URL(request.url).pathname) {
-      case `${this.publicPath}/callback`:
-        return this.callback({ ...this.props.callback, request });
-      case `${this.publicPath}/authorize`:
-        return this.authorize();
-      case `${this.publicPath}`:
-        return this.verify(request);
-      default:
-        return new Response("Not Found", { status: 404 });
-    }
-  }
-  async callback({
-    onError,
-    onSuccess,
-    request,
-    ...props
-  }) {
-    const url = new URL(request.url);
-    const code = url.searchParams.get("code");
-    console.log("Received code:", code);
-    try {
-      if (!code)
-        throw new Error("No code provided");
-      const exchanged = await this.client.exchange(code, this.redirectURI);
-      if (exchanged.err) {
-        throw new Error("Code exchange failed", { cause: exchanged });
-      }
-      const response = new Response(props.response?.body ?? null, {
-        status: 302,
-        headers: {},
-        ...props.response?.init || {}
-      });
-      response.headers.set("Location", url.origin);
-      setSession2(response, exchanged.tokens.access, exchanged.tokens.refresh);
-      onSuccess(exchanged);
-      return response;
-    } catch (e) {
-      await onError(e.cause);
-      throw e;
-    }
-  }
-  async authorize() {
-    return Response.redirect(await this.client.authorize(this.redirectURI, "code").then((v) => v.url), 302);
-  }
-  async verify(request) {
-    const cookies = new URLSearchParams(request.headers.get("cookie")?.replaceAll("; ", "&"));
-    const verified = await this.client.verify(this.props.verify.subjects, cookies.get("access_token"), {
-      refresh: cookies.get("refresh_token") || void 0
-    });
-    if (verified.err) {
-      const res = await this.props.verify.onError?.(verified);
-      return res || Response.redirect(new URL(request.url).origin + "/authorize", 302);
-    }
-    const resp = await this.props.verify.onSuccess(verified);
-    if (verified.tokens)
-      setSession2(resp, verified.tokens.access, verified.tokens.refresh);
-    return resp;
-  }
-};
-function setSession2(response, access, refresh) {
-  if (access) {
-    response.headers.append("Set-Cookie", `access_token=${access}; HttpOnly; SameSite=Strict; Path=/; Max-Age=2147483647`);
-  }
-  if (refresh) {
-    response.headers.append("Set-Cookie", `refresh_token=${refresh}; HttpOnly; SameSite=Strict; Path=/; Max-Age=2147483647`);
-  }
-}
-__name(setSession2, "setSession");
-var webcrypto_default2 = crypto;
-var isCryptoKey2 = /* @__PURE__ */ __name((key) => key instanceof CryptoKey, "isCryptoKey");
-var encoder2 = new TextEncoder();
-var decoder2 = new TextDecoder();
-var MAX_INT322 = 2 ** 32;
-function concat2(...buffers) {
-  const size = buffers.reduce((acc, { length }) => acc + length, 0);
-  const buf = new Uint8Array(size);
-  let i = 0;
-  for (const buffer of buffers) {
-    buf.set(buffer, i);
-    i += buffer.length;
-  }
-  return buf;
-}
-__name(concat2, "concat");
-var encodeBase642 = /* @__PURE__ */ __name((input) => {
-  let unencoded = input;
-  if (typeof unencoded === "string") {
-    unencoded = encoder2.encode(unencoded);
-  }
-  const CHUNK_SIZE = 32768;
-  const arr = [];
-  for (let i = 0; i < unencoded.length; i += CHUNK_SIZE) {
-    arr.push(String.fromCharCode.apply(null, unencoded.subarray(i, i + CHUNK_SIZE)));
-  }
-  return btoa(arr.join(""));
-}, "encodeBase64");
-var encode3 = /* @__PURE__ */ __name((input) => {
-  return encodeBase642(input).replace(/=/g, "").replace(/\+/g, "-").replace(/\//g, "_");
-}, "encode");
-var decodeBase642 = /* @__PURE__ */ __name((encoded) => {
-  const binary = atob(encoded);
-  const bytes = new Uint8Array(binary.length);
-  for (let i = 0; i < binary.length; i++) {
-    bytes[i] = binary.charCodeAt(i);
-  }
-  return bytes;
-}, "decodeBase64");
-var decode3 = /* @__PURE__ */ __name((input) => {
-  let encoded = input;
-  if (encoded instanceof Uint8Array) {
-    encoded = decoder2.decode(encoded);
-  }
-  encoded = encoded.replace(/-/g, "+").replace(/_/g, "/").replace(/\s/g, "");
-  try {
-    return decodeBase642(encoded);
-  } catch {
-    throw new TypeError("The input to be decoded is not correctly encoded.");
-  }
-}, "decode");
-var exports_errors2 = {};
-__export2(exports_errors2, {
-  JWTInvalid: /* @__PURE__ */ __name(() => JWTInvalid2, "JWTInvalid"),
-  JWTExpired: /* @__PURE__ */ __name(() => JWTExpired2, "JWTExpired"),
-  JWTClaimValidationFailed: /* @__PURE__ */ __name(() => JWTClaimValidationFailed2, "JWTClaimValidationFailed"),
-  JWSSignatureVerificationFailed: /* @__PURE__ */ __name(() => JWSSignatureVerificationFailed2, "JWSSignatureVerificationFailed"),
-  JWSInvalid: /* @__PURE__ */ __name(() => JWSInvalid2, "JWSInvalid"),
-  JWKSTimeout: /* @__PURE__ */ __name(() => JWKSTimeout2, "JWKSTimeout"),
-  JWKSNoMatchingKey: /* @__PURE__ */ __name(() => JWKSNoMatchingKey2, "JWKSNoMatchingKey"),
-  JWKSMultipleMatchingKeys: /* @__PURE__ */ __name(() => JWKSMultipleMatchingKeys2, "JWKSMultipleMatchingKeys"),
-  JWKSInvalid: /* @__PURE__ */ __name(() => JWKSInvalid2, "JWKSInvalid"),
-  JWKInvalid: /* @__PURE__ */ __name(() => JWKInvalid2, "JWKInvalid"),
-  JWEInvalid: /* @__PURE__ */ __name(() => JWEInvalid2, "JWEInvalid"),
-  JWEDecryptionFailed: /* @__PURE__ */ __name(() => JWEDecryptionFailed2, "JWEDecryptionFailed"),
-  JOSENotSupported: /* @__PURE__ */ __name(() => JOSENotSupported2, "JOSENotSupported"),
-  JOSEError: /* @__PURE__ */ __name(() => JOSEError2, "JOSEError"),
-  JOSEAlgNotAllowed: /* @__PURE__ */ __name(() => JOSEAlgNotAllowed2, "JOSEAlgNotAllowed")
-});
-var JOSEError2 = class extends Error {
-  static {
-    __name(this, "JOSEError");
-  }
-  constructor(message3, options) {
-    super(message3, options);
-    this.code = "ERR_JOSE_GENERIC";
-    this.name = this.constructor.name;
-    Error.captureStackTrace?.(this, this.constructor);
-  }
-};
-JOSEError2.code = "ERR_JOSE_GENERIC";
-var JWTClaimValidationFailed2 = class extends JOSEError2 {
-  static {
-    __name(this, "JWTClaimValidationFailed");
-  }
-  constructor(message3, payload, claim = "unspecified", reason = "unspecified") {
-    super(message3, { cause: { claim, reason, payload } });
-    this.code = "ERR_JWT_CLAIM_VALIDATION_FAILED";
-    this.claim = claim;
-    this.reason = reason;
-    this.payload = payload;
-  }
-};
-JWTClaimValidationFailed2.code = "ERR_JWT_CLAIM_VALIDATION_FAILED";
-var JWTExpired2 = class extends JOSEError2 {
-  static {
-    __name(this, "JWTExpired");
-  }
-  constructor(message3, payload, claim = "unspecified", reason = "unspecified") {
-    super(message3, { cause: { claim, reason, payload } });
-    this.code = "ERR_JWT_EXPIRED";
-    this.claim = claim;
-    this.reason = reason;
-    this.payload = payload;
-  }
-};
-JWTExpired2.code = "ERR_JWT_EXPIRED";
-var JOSEAlgNotAllowed2 = class extends JOSEError2 {
-  static {
-    __name(this, "JOSEAlgNotAllowed");
-  }
-  constructor() {
-    super(...arguments);
-    this.code = "ERR_JOSE_ALG_NOT_ALLOWED";
-  }
-};
-JOSEAlgNotAllowed2.code = "ERR_JOSE_ALG_NOT_ALLOWED";
-var JOSENotSupported2 = class extends JOSEError2 {
-  static {
-    __name(this, "JOSENotSupported");
-  }
-  constructor() {
-    super(...arguments);
-    this.code = "ERR_JOSE_NOT_SUPPORTED";
-  }
-};
-JOSENotSupported2.code = "ERR_JOSE_NOT_SUPPORTED";
-var JWEDecryptionFailed2 = class extends JOSEError2 {
-  static {
-    __name(this, "JWEDecryptionFailed");
-  }
-  constructor(message3 = "decryption operation failed", options) {
-    super(message3, options);
-    this.code = "ERR_JWE_DECRYPTION_FAILED";
-  }
-};
-JWEDecryptionFailed2.code = "ERR_JWE_DECRYPTION_FAILED";
-var JWEInvalid2 = class extends JOSEError2 {
-  static {
-    __name(this, "JWEInvalid");
-  }
-  constructor() {
-    super(...arguments);
-    this.code = "ERR_JWE_INVALID";
-  }
-};
-JWEInvalid2.code = "ERR_JWE_INVALID";
-var JWSInvalid2 = class extends JOSEError2 {
-  static {
-    __name(this, "JWSInvalid");
-  }
-  constructor() {
-    super(...arguments);
-    this.code = "ERR_JWS_INVALID";
-  }
-};
-JWSInvalid2.code = "ERR_JWS_INVALID";
-var JWTInvalid2 = class extends JOSEError2 {
-  static {
-    __name(this, "JWTInvalid");
-  }
-  constructor() {
-    super(...arguments);
-    this.code = "ERR_JWT_INVALID";
-  }
-};
-JWTInvalid2.code = "ERR_JWT_INVALID";
-var JWKInvalid2 = class extends JOSEError2 {
-  static {
-    __name(this, "JWKInvalid");
-  }
-  constructor() {
-    super(...arguments);
-    this.code = "ERR_JWK_INVALID";
-  }
-};
-JWKInvalid2.code = "ERR_JWK_INVALID";
-var JWKSInvalid2 = class extends JOSEError2 {
-  static {
-    __name(this, "JWKSInvalid");
-  }
-  constructor() {
-    super(...arguments);
-    this.code = "ERR_JWKS_INVALID";
-  }
-};
-JWKSInvalid2.code = "ERR_JWKS_INVALID";
-var JWKSNoMatchingKey2 = class extends JOSEError2 {
-  static {
-    __name(this, "JWKSNoMatchingKey");
-  }
-  constructor(message3 = "no applicable key found in the JSON Web Key Set", options) {
-    super(message3, options);
-    this.code = "ERR_JWKS_NO_MATCHING_KEY";
-  }
-};
-JWKSNoMatchingKey2.code = "ERR_JWKS_NO_MATCHING_KEY";
-var JWKSMultipleMatchingKeys2 = class extends JOSEError2 {
-  static {
-    __name(this, "JWKSMultipleMatchingKeys");
-  }
-  constructor(message3 = "multiple matching keys found in the JSON Web Key Set", options) {
-    super(message3, options);
-    this.code = "ERR_JWKS_MULTIPLE_MATCHING_KEYS";
-  }
-};
-JWKSMultipleMatchingKeys2.code = "ERR_JWKS_MULTIPLE_MATCHING_KEYS";
-var JWKSTimeout2 = class extends JOSEError2 {
-  static {
-    __name(this, "JWKSTimeout");
-  }
-  constructor(message3 = "request timed out", options) {
-    super(message3, options);
-    this.code = "ERR_JWKS_TIMEOUT";
-  }
-};
-JWKSTimeout2.code = "ERR_JWKS_TIMEOUT";
-var JWSSignatureVerificationFailed2 = class extends JOSEError2 {
-  static {
-    __name(this, "JWSSignatureVerificationFailed");
-  }
-  constructor(message3 = "signature verification failed", options) {
-    super(message3, options);
-    this.code = "ERR_JWS_SIGNATURE_VERIFICATION_FAILED";
-  }
-};
-JWSSignatureVerificationFailed2.code = "ERR_JWS_SIGNATURE_VERIFICATION_FAILED";
-function unusable2(name, prop = "algorithm.name") {
-  return new TypeError(`CryptoKey does not support this operation, its ${prop} must be ${name}`);
-}
-__name(unusable2, "unusable");
-function isAlgorithm2(algorithm, name) {
-  return algorithm.name === name;
-}
-__name(isAlgorithm2, "isAlgorithm");
-function getHashLength2(hash) {
-  return parseInt(hash.name.slice(4), 10);
-}
-__name(getHashLength2, "getHashLength");
-function getNamedCurve2(alg) {
-  switch (alg) {
-    case "ES256":
-      return "P-256";
-    case "ES384":
-      return "P-384";
-    case "ES512":
-      return "P-521";
-    default:
-      throw new Error("unreachable");
-  }
-}
-__name(getNamedCurve2, "getNamedCurve");
-function checkUsage2(key, usages) {
-  if (usages.length && !usages.some((expected) => key.usages.includes(expected))) {
-    let msg = "CryptoKey does not support this operation, its usages must include ";
-    if (usages.length > 2) {
-      const last = usages.pop();
-      msg += `one of ${usages.join(", ")}, or ${last}.`;
-    } else if (usages.length === 2) {
-      msg += `one of ${usages[0]} or ${usages[1]}.`;
-    } else {
-      msg += `${usages[0]}.`;
-    }
-    throw new TypeError(msg);
-  }
-}
-__name(checkUsage2, "checkUsage");
-function checkSigCryptoKey2(key, alg, ...usages) {
-  switch (alg) {
-    case "HS256":
-    case "HS384":
-    case "HS512": {
-      if (!isAlgorithm2(key.algorithm, "HMAC"))
-        throw unusable2("HMAC");
-      const expected = parseInt(alg.slice(2), 10);
-      const actual = getHashLength2(key.algorithm.hash);
-      if (actual !== expected)
-        throw unusable2(`SHA-${expected}`, "algorithm.hash");
-      break;
-    }
-    case "RS256":
-    case "RS384":
-    case "RS512": {
-      if (!isAlgorithm2(key.algorithm, "RSASSA-PKCS1-v1_5"))
-        throw unusable2("RSASSA-PKCS1-v1_5");
-      const expected = parseInt(alg.slice(2), 10);
-      const actual = getHashLength2(key.algorithm.hash);
-      if (actual !== expected)
-        throw unusable2(`SHA-${expected}`, "algorithm.hash");
-      break;
-    }
-    case "PS256":
-    case "PS384":
-    case "PS512": {
-      if (!isAlgorithm2(key.algorithm, "RSA-PSS"))
-        throw unusable2("RSA-PSS");
-      const expected = parseInt(alg.slice(2), 10);
-      const actual = getHashLength2(key.algorithm.hash);
-      if (actual !== expected)
-        throw unusable2(`SHA-${expected}`, "algorithm.hash");
-      break;
-    }
-    case "EdDSA": {
-      if (key.algorithm.name !== "Ed25519" && key.algorithm.name !== "Ed448") {
-        throw unusable2("Ed25519 or Ed448");
-      }
-      break;
-    }
-    case "ES256":
-    case "ES384":
-    case "ES512": {
-      if (!isAlgorithm2(key.algorithm, "ECDSA"))
-        throw unusable2("ECDSA");
-      const expected = getNamedCurve2(alg);
-      const actual = key.algorithm.namedCurve;
-      if (actual !== expected)
-        throw unusable2(expected, "algorithm.namedCurve");
-      break;
-    }
-    default:
-      throw new TypeError("CryptoKey does not support this operation");
-  }
-  checkUsage2(key, usages);
-}
-__name(checkSigCryptoKey2, "checkSigCryptoKey");
-function message2(msg, actual, ...types3) {
-  types3 = types3.filter(Boolean);
-  if (types3.length > 2) {
-    const last = types3.pop();
-    msg += `one of type ${types3.join(", ")}, or ${last}.`;
-  } else if (types3.length === 2) {
-    msg += `one of type ${types3[0]} or ${types3[1]}.`;
-  } else {
-    msg += `of type ${types3[0]}.`;
-  }
-  if (actual == null) {
-    msg += ` Received ${actual}`;
-  } else if (typeof actual === "function" && actual.name) {
-    msg += ` Received function ${actual.name}`;
-  } else if (typeof actual === "object" && actual != null) {
-    if (actual.constructor?.name) {
-      msg += ` Received an instance of ${actual.constructor.name}`;
-    }
-  }
-  return msg;
-}
-__name(message2, "message");
-var invalid_key_input_default2 = /* @__PURE__ */ __name((actual, ...types3) => {
-  return message2("Key must be ", actual, ...types3);
-}, "invalid_key_input_default");
-function withAlg2(alg, actual, ...types3) {
-  return message2(`Key for the ${alg} algorithm must be `, actual, ...types3);
-}
-__name(withAlg2, "withAlg");
-var is_key_like_default2 = /* @__PURE__ */ __name((key) => {
-  if (isCryptoKey2(key)) {
-    return true;
-  }
-  return key?.[Symbol.toStringTag] === "KeyObject";
-}, "is_key_like_default");
-var types2 = ["CryptoKey"];
-var isDisjoint2 = /* @__PURE__ */ __name((...headers) => {
-  const sources = headers.filter(Boolean);
-  if (sources.length === 0 || sources.length === 1) {
-    return true;
-  }
-  let acc;
-  for (const header of sources) {
-    const parameters = Object.keys(header);
-    if (!acc || acc.size === 0) {
-      acc = new Set(parameters);
-      continue;
-    }
-    for (const parameter of parameters) {
-      if (acc.has(parameter)) {
-        return false;
-      }
-      acc.add(parameter);
-    }
-  }
-  return true;
-}, "isDisjoint");
-var is_disjoint_default2 = isDisjoint2;
-function isObjectLike2(value) {
-  return typeof value === "object" && value !== null;
-}
-__name(isObjectLike2, "isObjectLike");
-function isObject2(input) {
-  if (!isObjectLike2(input) || Object.prototype.toString.call(input) !== "[object Object]") {
-    return false;
-  }
-  if (Object.getPrototypeOf(input) === null) {
-    return true;
-  }
-  let proto = input;
-  while (Object.getPrototypeOf(proto) !== null) {
-    proto = Object.getPrototypeOf(proto);
-  }
-  return Object.getPrototypeOf(input) === proto;
-}
-__name(isObject2, "isObject");
-var check_key_length_default2 = /* @__PURE__ */ __name((alg, key) => {
-  if (alg.startsWith("RS") || alg.startsWith("PS")) {
-    const { modulusLength } = key.algorithm;
-    if (typeof modulusLength !== "number" || modulusLength < 2048) {
-      throw new TypeError(`${alg} requires key modulusLength to be 2048 bits or larger`);
-    }
-  }
-}, "check_key_length_default");
-function isJWK2(key) {
-  return isObject2(key) && typeof key.kty === "string";
-}
-__name(isJWK2, "isJWK");
-function isPrivateJWK2(key) {
-  return key.kty !== "oct" && typeof key.d === "string";
-}
-__name(isPrivateJWK2, "isPrivateJWK");
-function isPublicJWK2(key) {
-  return key.kty !== "oct" && typeof key.d === "undefined";
-}
-__name(isPublicJWK2, "isPublicJWK");
-function isSecretJWK2(key) {
-  return isJWK2(key) && key.kty === "oct" && typeof key.k === "string";
-}
-__name(isSecretJWK2, "isSecretJWK");
-function subtleMapping2(jwk) {
-  let algorithm;
-  let keyUsages;
-  switch (jwk.kty) {
-    case "RSA": {
-      switch (jwk.alg) {
-        case "PS256":
-        case "PS384":
-        case "PS512":
-          algorithm = { name: "RSA-PSS", hash: `SHA-${jwk.alg.slice(-3)}` };
-          keyUsages = jwk.d ? ["sign"] : ["verify"];
-          break;
-        case "RS256":
-        case "RS384":
-        case "RS512":
-          algorithm = { name: "RSASSA-PKCS1-v1_5", hash: `SHA-${jwk.alg.slice(-3)}` };
-          keyUsages = jwk.d ? ["sign"] : ["verify"];
-          break;
-        case "RSA-OAEP":
-        case "RSA-OAEP-256":
-        case "RSA-OAEP-384":
-        case "RSA-OAEP-512":
-          algorithm = {
-            name: "RSA-OAEP",
-            hash: `SHA-${parseInt(jwk.alg.slice(-3), 10) || 1}`
-          };
-          keyUsages = jwk.d ? ["decrypt", "unwrapKey"] : ["encrypt", "wrapKey"];
-          break;
-        default:
-          throw new JOSENotSupported2('Invalid or unsupported JWK "alg" (Algorithm) Parameter value');
-      }
-      break;
-    }
-    case "EC": {
-      switch (jwk.alg) {
-        case "ES256":
-          algorithm = { name: "ECDSA", namedCurve: "P-256" };
-          keyUsages = jwk.d ? ["sign"] : ["verify"];
-          break;
-        case "ES384":
-          algorithm = { name: "ECDSA", namedCurve: "P-384" };
-          keyUsages = jwk.d ? ["sign"] : ["verify"];
-          break;
-        case "ES512":
-          algorithm = { name: "ECDSA", namedCurve: "P-521" };
-          keyUsages = jwk.d ? ["sign"] : ["verify"];
-          break;
-        case "ECDH-ES":
-        case "ECDH-ES+A128KW":
-        case "ECDH-ES+A192KW":
-        case "ECDH-ES+A256KW":
-          algorithm = { name: "ECDH", namedCurve: jwk.crv };
-          keyUsages = jwk.d ? ["deriveBits"] : [];
-          break;
-        default:
-          throw new JOSENotSupported2('Invalid or unsupported JWK "alg" (Algorithm) Parameter value');
-      }
-      break;
-    }
-    case "OKP": {
-      switch (jwk.alg) {
-        case "EdDSA":
-          algorithm = { name: jwk.crv };
-          keyUsages = jwk.d ? ["sign"] : ["verify"];
-          break;
-        case "ECDH-ES":
-        case "ECDH-ES+A128KW":
-        case "ECDH-ES+A192KW":
-        case "ECDH-ES+A256KW":
-          algorithm = { name: jwk.crv };
-          keyUsages = jwk.d ? ["deriveBits"] : [];
-          break;
-        default:
-          throw new JOSENotSupported2('Invalid or unsupported JWK "alg" (Algorithm) Parameter value');
-      }
-      break;
-    }
-    default:
-      throw new JOSENotSupported2('Invalid or unsupported JWK "kty" (Key Type) Parameter value');
-  }
-  return { algorithm, keyUsages };
-}
-__name(subtleMapping2, "subtleMapping");
-var parse2 = /* @__PURE__ */ __name(async (jwk) => {
-  if (!jwk.alg) {
-    throw new TypeError('"alg" argument is required when "jwk.alg" is not present');
-  }
-  const { algorithm, keyUsages } = subtleMapping2(jwk);
-  const rest = [
-    algorithm,
-    jwk.ext ?? false,
-    jwk.key_ops ?? keyUsages
-  ];
-  const keyData = { ...jwk };
-  delete keyData.alg;
-  delete keyData.use;
-  return webcrypto_default2.subtle.importKey("jwk", keyData, ...rest);
-}, "parse");
-var jwk_to_key_default2 = parse2;
-var exportKeyValue2 = /* @__PURE__ */ __name((k) => decode3(k), "exportKeyValue");
-var privCache2;
-var pubCache2;
-var isKeyObject2 = /* @__PURE__ */ __name((key) => {
-  return key?.[Symbol.toStringTag] === "KeyObject";
-}, "isKeyObject");
-var importAndCache2 = /* @__PURE__ */ __name(async (cache, key, jwk, alg, freeze = false) => {
-  let cached = cache.get(key);
-  if (cached?.[alg]) {
-    return cached[alg];
-  }
-  const cryptoKey = await jwk_to_key_default2({ ...jwk, alg });
-  if (freeze)
-    Object.freeze(key);
-  if (!cached) {
-    cache.set(key, { [alg]: cryptoKey });
-  } else {
-    cached[alg] = cryptoKey;
-  }
-  return cryptoKey;
-}, "importAndCache");
-var normalizePublicKey2 = /* @__PURE__ */ __name((key, alg) => {
-  if (isKeyObject2(key)) {
-    let jwk = key.export({ format: "jwk" });
-    delete jwk.d;
-    delete jwk.dp;
-    delete jwk.dq;
-    delete jwk.p;
-    delete jwk.q;
-    delete jwk.qi;
-    if (jwk.k) {
-      return exportKeyValue2(jwk.k);
-    }
-    pubCache2 || (pubCache2 = /* @__PURE__ */ new WeakMap());
-    return importAndCache2(pubCache2, key, jwk, alg);
-  }
-  if (isJWK2(key)) {
-    if (key.k)
-      return decode3(key.k);
-    pubCache2 || (pubCache2 = /* @__PURE__ */ new WeakMap());
-    const cryptoKey = importAndCache2(pubCache2, key, key, alg, true);
-    return cryptoKey;
-  }
-  return key;
-}, "normalizePublicKey");
-var normalizePrivateKey2 = /* @__PURE__ */ __name((key, alg) => {
-  if (isKeyObject2(key)) {
-    let jwk = key.export({ format: "jwk" });
-    if (jwk.k) {
-      return exportKeyValue2(jwk.k);
-    }
-    privCache2 || (privCache2 = /* @__PURE__ */ new WeakMap());
-    return importAndCache2(privCache2, key, jwk, alg);
-  }
-  if (isJWK2(key)) {
-    if (key.k)
-      return decode3(key.k);
-    privCache2 || (privCache2 = /* @__PURE__ */ new WeakMap());
-    const cryptoKey = importAndCache2(privCache2, key, key, alg, true);
-    return cryptoKey;
-  }
-  return key;
-}, "normalizePrivateKey");
-var normalize_key_default2 = { normalizePublicKey: normalizePublicKey2, normalizePrivateKey: normalizePrivateKey2 };
-async function importJWK2(jwk, alg) {
-  if (!isObject2(jwk)) {
-    throw new TypeError("JWK must be an object");
-  }
-  alg || (alg = jwk.alg);
-  switch (jwk.kty) {
-    case "oct":
-      if (typeof jwk.k !== "string" || !jwk.k) {
-        throw new TypeError('missing "k" (Key Value) Parameter value');
-      }
-      return decode3(jwk.k);
-    case "RSA":
-      if (jwk.oth !== void 0) {
-        throw new JOSENotSupported2('RSA JWK "oth" (Other Primes Info) Parameter value is not supported');
-      }
-    case "EC":
-    case "OKP":
-      return jwk_to_key_default2({ ...jwk, alg });
-    default:
-      throw new JOSENotSupported2('Unsupported "kty" (Key Type) Parameter value');
-  }
-}
-__name(importJWK2, "importJWK");
-var tag2 = /* @__PURE__ */ __name((key) => key?.[Symbol.toStringTag], "tag");
-var jwkMatchesOp2 = /* @__PURE__ */ __name((alg, key, usage) => {
-  if (key.use !== void 0 && key.use !== "sig") {
-    throw new TypeError("Invalid key for this operation, when present its use must be sig");
-  }
-  if (key.key_ops !== void 0 && key.key_ops.includes?.(usage) !== true) {
-    throw new TypeError(`Invalid key for this operation, when present its key_ops must include ${usage}`);
-  }
-  if (key.alg !== void 0 && key.alg !== alg) {
-    throw new TypeError(`Invalid key for this operation, when present its alg must be ${alg}`);
-  }
-  return true;
-}, "jwkMatchesOp");
-var symmetricTypeCheck2 = /* @__PURE__ */ __name((alg, key, usage, allowJwk) => {
-  if (key instanceof Uint8Array)
-    return;
-  if (allowJwk && isJWK2(key)) {
-    if (isSecretJWK2(key) && jwkMatchesOp2(alg, key, usage))
-      return;
-    throw new TypeError(`JSON Web Key for symmetric algorithms must have JWK "kty" (Key Type) equal to "oct" and the JWK "k" (Key Value) present`);
-  }
-  if (!is_key_like_default2(key)) {
-    throw new TypeError(withAlg2(alg, key, ...types2, "Uint8Array", allowJwk ? "JSON Web Key" : null));
-  }
-  if (key.type !== "secret") {
-    throw new TypeError(`${tag2(key)} instances for symmetric algorithms must be of type "secret"`);
-  }
-}, "symmetricTypeCheck");
-var asymmetricTypeCheck2 = /* @__PURE__ */ __name((alg, key, usage, allowJwk) => {
-  if (allowJwk && isJWK2(key)) {
-    switch (usage) {
-      case "sign":
-        if (isPrivateJWK2(key) && jwkMatchesOp2(alg, key, usage))
-          return;
-        throw new TypeError(`JSON Web Key for this operation be a private JWK`);
-      case "verify":
-        if (isPublicJWK2(key) && jwkMatchesOp2(alg, key, usage))
-          return;
-        throw new TypeError(`JSON Web Key for this operation be a public JWK`);
-    }
-  }
-  if (!is_key_like_default2(key)) {
-    throw new TypeError(withAlg2(alg, key, ...types2, allowJwk ? "JSON Web Key" : null));
-  }
-  if (key.type === "secret") {
-    throw new TypeError(`${tag2(key)} instances for asymmetric algorithms must not be of type "secret"`);
-  }
-  if (usage === "sign" && key.type === "public") {
-    throw new TypeError(`${tag2(key)} instances for asymmetric algorithm signing must be of type "private"`);
-  }
-  if (usage === "decrypt" && key.type === "public") {
-    throw new TypeError(`${tag2(key)} instances for asymmetric algorithm decryption must be of type "private"`);
-  }
-  if (key.algorithm && usage === "verify" && key.type === "private") {
-    throw new TypeError(`${tag2(key)} instances for asymmetric algorithm verifying must be of type "public"`);
-  }
-  if (key.algorithm && usage === "encrypt" && key.type === "private") {
-    throw new TypeError(`${tag2(key)} instances for asymmetric algorithm encryption must be of type "public"`);
-  }
-}, "asymmetricTypeCheck");
-function checkKeyType2(allowJwk, alg, key, usage) {
-  const symmetric = alg.startsWith("HS") || alg === "dir" || alg.startsWith("PBES2") || /^A\d{3}(?:GCM)?KW$/.test(alg);
-  if (symmetric) {
-    symmetricTypeCheck2(alg, key, usage, allowJwk);
-  } else {
-    asymmetricTypeCheck2(alg, key, usage, allowJwk);
-  }
-}
-__name(checkKeyType2, "checkKeyType");
-var check_key_type_default2 = checkKeyType2.bind(void 0, false);
-var checkKeyTypeWithJwk2 = checkKeyType2.bind(void 0, true);
-function validateCrit2(Err, recognizedDefault, recognizedOption, protectedHeader, joseHeader) {
-  if (joseHeader.crit !== void 0 && protectedHeader?.crit === void 0) {
-    throw new Err('"crit" (Critical) Header Parameter MUST be integrity protected');
-  }
-  if (!protectedHeader || protectedHeader.crit === void 0) {
-    return /* @__PURE__ */ new Set();
-  }
-  if (!Array.isArray(protectedHeader.crit) || protectedHeader.crit.length === 0 || protectedHeader.crit.some((input) => typeof input !== "string" || input.length === 0)) {
-    throw new Err('"crit" (Critical) Header Parameter MUST be an array of non-empty strings when present');
-  }
-  let recognized;
-  if (recognizedOption !== void 0) {
-    recognized = new Map([...Object.entries(recognizedOption), ...recognizedDefault.entries()]);
-  } else {
-    recognized = recognizedDefault;
-  }
-  for (const parameter of protectedHeader.crit) {
-    if (!recognized.has(parameter)) {
-      throw new JOSENotSupported2(`Extension Header Parameter "${parameter}" is not recognized`);
-    }
-    if (joseHeader[parameter] === void 0) {
-      throw new Err(`Extension Header Parameter "${parameter}" is missing`);
-    }
-    if (recognized.get(parameter) && protectedHeader[parameter] === void 0) {
-      throw new Err(`Extension Header Parameter "${parameter}" MUST be integrity protected`);
-    }
-  }
-  return new Set(protectedHeader.crit);
-}
-__name(validateCrit2, "validateCrit");
-var validate_crit_default2 = validateCrit2;
-var validateAlgorithms2 = /* @__PURE__ */ __name((option, algorithms) => {
-  if (algorithms !== void 0 && (!Array.isArray(algorithms) || algorithms.some((s) => typeof s !== "string"))) {
-    throw new TypeError(`"${option}" option must be an array of strings`);
-  }
-  if (!algorithms) {
-    return;
-  }
-  return new Set(algorithms);
-}, "validateAlgorithms");
-var validate_algorithms_default2 = validateAlgorithms2;
-function subtleDsa2(alg, algorithm) {
-  const hash = `SHA-${alg.slice(-3)}`;
-  switch (alg) {
-    case "HS256":
-    case "HS384":
-    case "HS512":
-      return { hash, name: "HMAC" };
-    case "PS256":
-    case "PS384":
-    case "PS512":
-      return { hash, name: "RSA-PSS", saltLength: alg.slice(-3) >> 3 };
-    case "RS256":
-    case "RS384":
-    case "RS512":
-      return { hash, name: "RSASSA-PKCS1-v1_5" };
-    case "ES256":
-    case "ES384":
-    case "ES512":
-      return { hash, name: "ECDSA", namedCurve: algorithm.namedCurve };
-    case "EdDSA":
-      return { name: algorithm.name };
-    default:
-      throw new JOSENotSupported2(`alg ${alg} is not supported either by JOSE or your javascript runtime`);
-  }
-}
-__name(subtleDsa2, "subtleDsa");
-async function getCryptoKey2(alg, key, usage) {
-  if (usage === "sign") {
-    key = await normalize_key_default2.normalizePrivateKey(key, alg);
-  }
-  if (usage === "verify") {
-    key = await normalize_key_default2.normalizePublicKey(key, alg);
-  }
-  if (isCryptoKey2(key)) {
-    checkSigCryptoKey2(key, alg, usage);
-    return key;
-  }
-  if (key instanceof Uint8Array) {
-    if (!alg.startsWith("HS")) {
-      throw new TypeError(invalid_key_input_default2(key, ...types2));
-    }
-    return webcrypto_default2.subtle.importKey("raw", key, { hash: `SHA-${alg.slice(-3)}`, name: "HMAC" }, false, [usage]);
-  }
-  throw new TypeError(invalid_key_input_default2(key, ...types2, "Uint8Array", "JSON Web Key"));
-}
-__name(getCryptoKey2, "getCryptoKey");
-var verify2 = /* @__PURE__ */ __name(async (alg, key, signature, data) => {
-  const cryptoKey = await getCryptoKey2(alg, key, "verify");
-  check_key_length_default2(alg, cryptoKey);
-  const algorithm = subtleDsa2(alg, cryptoKey.algorithm);
-  try {
-    return await webcrypto_default2.subtle.verify(algorithm, cryptoKey, signature, data);
-  } catch {
-    return false;
-  }
-}, "verify");
-var verify_default2 = verify2;
-async function flattenedVerify2(jws, key, options) {
-  if (!isObject2(jws)) {
-    throw new JWSInvalid2("Flattened JWS must be an object");
-  }
-  if (jws.protected === void 0 && jws.header === void 0) {
-    throw new JWSInvalid2('Flattened JWS must have either of the "protected" or "header" members');
-  }
-  if (jws.protected !== void 0 && typeof jws.protected !== "string") {
-    throw new JWSInvalid2("JWS Protected Header incorrect type");
-  }
-  if (jws.payload === void 0) {
-    throw new JWSInvalid2("JWS Payload missing");
-  }
-  if (typeof jws.signature !== "string") {
-    throw new JWSInvalid2("JWS Signature missing or incorrect type");
-  }
-  if (jws.header !== void 0 && !isObject2(jws.header)) {
-    throw new JWSInvalid2("JWS Unprotected Header incorrect type");
-  }
-  let parsedProt = {};
-  if (jws.protected) {
-    try {
-      const protectedHeader = decode3(jws.protected);
-      parsedProt = JSON.parse(decoder2.decode(protectedHeader));
-    } catch {
-      throw new JWSInvalid2("JWS Protected Header is invalid");
-    }
-  }
-  if (!is_disjoint_default2(parsedProt, jws.header)) {
-    throw new JWSInvalid2("JWS Protected and JWS Unprotected Header Parameter names must be disjoint");
-  }
-  const joseHeader = {
-    ...parsedProt,
-    ...jws.header
-  };
-  const extensions = validate_crit_default2(JWSInvalid2, /* @__PURE__ */ new Map([["b64", true]]), options?.crit, parsedProt, joseHeader);
-  let b64 = true;
-  if (extensions.has("b64")) {
-    b64 = parsedProt.b64;
-    if (typeof b64 !== "boolean") {
-      throw new JWSInvalid2('The "b64" (base64url-encode payload) Header Parameter must be a boolean');
-    }
-  }
-  const { alg } = joseHeader;
-  if (typeof alg !== "string" || !alg) {
-    throw new JWSInvalid2('JWS "alg" (Algorithm) Header Parameter missing or invalid');
-  }
-  const algorithms = options && validate_algorithms_default2("algorithms", options.algorithms);
-  if (algorithms && !algorithms.has(alg)) {
-    throw new JOSEAlgNotAllowed2('"alg" (Algorithm) Header Parameter value not allowed');
-  }
-  if (b64) {
-    if (typeof jws.payload !== "string") {
-      throw new JWSInvalid2("JWS Payload must be a string");
-    }
-  } else if (typeof jws.payload !== "string" && !(jws.payload instanceof Uint8Array)) {
-    throw new JWSInvalid2("JWS Payload must be a string or an Uint8Array instance");
-  }
-  let resolvedKey = false;
-  if (typeof key === "function") {
-    key = await key(parsedProt, jws);
-    resolvedKey = true;
-    checkKeyTypeWithJwk2(alg, key, "verify");
-    if (isJWK2(key)) {
-      key = await importJWK2(key, alg);
-    }
-  } else {
-    checkKeyTypeWithJwk2(alg, key, "verify");
-  }
-  const data = concat2(encoder2.encode(jws.protected ?? ""), encoder2.encode("."), typeof jws.payload === "string" ? encoder2.encode(jws.payload) : jws.payload);
-  let signature;
-  try {
-    signature = decode3(jws.signature);
-  } catch {
-    throw new JWSInvalid2("Failed to base64url decode the signature");
-  }
-  const verified = await verify_default2(alg, key, signature, data);
-  if (!verified) {
-    throw new JWSSignatureVerificationFailed2();
-  }
-  let payload;
-  if (b64) {
-    try {
-      payload = decode3(jws.payload);
-    } catch {
-      throw new JWSInvalid2("Failed to base64url decode the payload");
-    }
-  } else if (typeof jws.payload === "string") {
-    payload = encoder2.encode(jws.payload);
-  } else {
-    payload = jws.payload;
-  }
-  const result = { payload };
-  if (jws.protected !== void 0) {
-    result.protectedHeader = parsedProt;
-  }
-  if (jws.header !== void 0) {
-    result.unprotectedHeader = jws.header;
-  }
-  if (resolvedKey) {
-    return { ...result, key };
-  }
-  return result;
-}
-__name(flattenedVerify2, "flattenedVerify");
-async function compactVerify2(jws, key, options) {
-  if (jws instanceof Uint8Array) {
-    jws = decoder2.decode(jws);
-  }
-  if (typeof jws !== "string") {
-    throw new JWSInvalid2("Compact JWS must be a string or Uint8Array");
-  }
-  const { 0: protectedHeader, 1: payload, 2: signature, length } = jws.split(".");
-  if (length !== 3) {
-    throw new JWSInvalid2("Invalid Compact JWS");
-  }
-  const verified = await flattenedVerify2({ payload, protected: protectedHeader, signature }, key, options);
-  const result = { payload: verified.payload, protectedHeader: verified.protectedHeader };
-  if (typeof key === "function") {
-    return { ...result, key: verified.key };
-  }
-  return result;
-}
-__name(compactVerify2, "compactVerify");
-var epoch_default2 = /* @__PURE__ */ __name((date) => Math.floor(date.getTime() / 1e3), "epoch_default");
-var minute2 = 60;
-var hour2 = minute2 * 60;
-var day2 = hour2 * 24;
-var week2 = day2 * 7;
-var year2 = day2 * 365.25;
-var REGEX2 = /^(\+|\-)? ?(\d+|\d+\.\d+) ?(seconds?|secs?|s|minutes?|mins?|m|hours?|hrs?|h|days?|d|weeks?|w|years?|yrs?|y)(?: (ago|from now))?$/i;
-var secs_default2 = /* @__PURE__ */ __name((str) => {
-  const matched = REGEX2.exec(str);
-  if (!matched || matched[4] && matched[1]) {
-    throw new TypeError("Invalid time period format");
-  }
-  const value = parseFloat(matched[2]);
-  const unit = matched[3].toLowerCase();
-  let numericDate;
-  switch (unit) {
-    case "sec":
-    case "secs":
-    case "second":
-    case "seconds":
-    case "s":
-      numericDate = Math.round(value);
-      break;
-    case "minute":
-    case "minutes":
-    case "min":
-    case "mins":
-    case "m":
-      numericDate = Math.round(value * minute2);
-      break;
-    case "hour":
-    case "hours":
-    case "hr":
-    case "hrs":
-    case "h":
-      numericDate = Math.round(value * hour2);
-      break;
-    case "day":
-    case "days":
-    case "d":
-      numericDate = Math.round(value * day2);
-      break;
-    case "week":
-    case "weeks":
-    case "w":
-      numericDate = Math.round(value * week2);
-      break;
-    default:
-      numericDate = Math.round(value * year2);
-      break;
-  }
-  if (matched[1] === "-" || matched[4] === "ago") {
-    return -numericDate;
-  }
-  return numericDate;
-}, "secs_default");
-var normalizeTyp2 = /* @__PURE__ */ __name((value) => value.toLowerCase().replace(/^application\//, ""), "normalizeTyp");
-var checkAudiencePresence2 = /* @__PURE__ */ __name((audPayload, audOption) => {
-  if (typeof audPayload === "string") {
-    return audOption.includes(audPayload);
-  }
-  if (Array.isArray(audPayload)) {
-    return audOption.some(Set.prototype.has.bind(new Set(audPayload)));
-  }
-  return false;
-}, "checkAudiencePresence");
-var jwt_claims_set_default2 = /* @__PURE__ */ __name((protectedHeader, encodedPayload, options = {}) => {
-  let payload;
-  try {
-    payload = JSON.parse(decoder2.decode(encodedPayload));
-  } catch {
-  }
-  if (!isObject2(payload)) {
-    throw new JWTInvalid2("JWT Claims Set must be a top-level JSON object");
-  }
-  const { typ } = options;
-  if (typ && (typeof protectedHeader.typ !== "string" || normalizeTyp2(protectedHeader.typ) !== normalizeTyp2(typ))) {
-    throw new JWTClaimValidationFailed2('unexpected "typ" JWT header value', payload, "typ", "check_failed");
-  }
-  const { requiredClaims = [], issuer, subject, audience, maxTokenAge } = options;
-  const presenceCheck = [...requiredClaims];
-  if (maxTokenAge !== void 0)
-    presenceCheck.push("iat");
-  if (audience !== void 0)
-    presenceCheck.push("aud");
-  if (subject !== void 0)
-    presenceCheck.push("sub");
-  if (issuer !== void 0)
-    presenceCheck.push("iss");
-  for (const claim of new Set(presenceCheck.reverse())) {
-    if (!(claim in payload)) {
-      throw new JWTClaimValidationFailed2(`missing required "${claim}" claim`, payload, claim, "missing");
-    }
-  }
-  if (issuer && !(Array.isArray(issuer) ? issuer : [issuer]).includes(payload.iss)) {
-    throw new JWTClaimValidationFailed2('unexpected "iss" claim value', payload, "iss", "check_failed");
-  }
-  if (subject && payload.sub !== subject) {
-    throw new JWTClaimValidationFailed2('unexpected "sub" claim value', payload, "sub", "check_failed");
-  }
-  if (audience && !checkAudiencePresence2(payload.aud, typeof audience === "string" ? [audience] : audience)) {
-    throw new JWTClaimValidationFailed2('unexpected "aud" claim value', payload, "aud", "check_failed");
-  }
-  let tolerance;
-  switch (typeof options.clockTolerance) {
-    case "string":
-      tolerance = secs_default2(options.clockTolerance);
-      break;
-    case "number":
-      tolerance = options.clockTolerance;
-      break;
-    case "undefined":
-      tolerance = 0;
-      break;
-    default:
-      throw new TypeError("Invalid clockTolerance option type");
-  }
-  const { currentDate } = options;
-  const now = epoch_default2(currentDate || /* @__PURE__ */ new Date());
-  if ((payload.iat !== void 0 || maxTokenAge) && typeof payload.iat !== "number") {
-    throw new JWTClaimValidationFailed2('"iat" claim must be a number', payload, "iat", "invalid");
-  }
-  if (payload.nbf !== void 0) {
-    if (typeof payload.nbf !== "number") {
-      throw new JWTClaimValidationFailed2('"nbf" claim must be a number', payload, "nbf", "invalid");
-    }
-    if (payload.nbf > now + tolerance) {
-      throw new JWTClaimValidationFailed2('"nbf" claim timestamp check failed', payload, "nbf", "check_failed");
-    }
-  }
-  if (payload.exp !== void 0) {
-    if (typeof payload.exp !== "number") {
-      throw new JWTClaimValidationFailed2('"exp" claim must be a number', payload, "exp", "invalid");
-    }
-    if (payload.exp <= now - tolerance) {
-      throw new JWTExpired2('"exp" claim timestamp check failed', payload, "exp", "check_failed");
-    }
-  }
-  if (maxTokenAge) {
-    const age = now - payload.iat;
-    const max = typeof maxTokenAge === "number" ? maxTokenAge : secs_default2(maxTokenAge);
-    if (age - tolerance > max) {
-      throw new JWTExpired2('"iat" claim timestamp check failed (too far in the past)', payload, "iat", "check_failed");
-    }
-    if (age < 0 - tolerance) {
-      throw new JWTClaimValidationFailed2('"iat" claim timestamp check failed (it should be in the past)', payload, "iat", "check_failed");
-    }
-  }
-  return payload;
-}, "jwt_claims_set_default");
-async function jwtVerify2(jwt, key, options) {
-  const verified = await compactVerify2(jwt, key, options);
-  if (verified.protectedHeader.crit?.includes("b64") && verified.protectedHeader.b64 === false) {
-    throw new JWTInvalid2("JWTs MUST NOT use unencoded payload");
-  }
-  const payload = jwt_claims_set_default2(verified.protectedHeader, verified.payload, options);
-  const result = { payload, protectedHeader: verified.protectedHeader };
-  if (typeof key === "function") {
-    return { ...result, key: verified.key };
-  }
-  return result;
-}
-__name(jwtVerify2, "jwtVerify");
-function getKtyFromAlg2(alg) {
-  switch (typeof alg === "string" && alg.slice(0, 2)) {
-    case "RS":
-    case "PS":
-      return "RSA";
-    case "ES":
-      return "EC";
-    case "Ed":
-      return "OKP";
-    default:
-      throw new JOSENotSupported2('Unsupported "alg" value for a JSON Web Key Set');
-  }
-}
-__name(getKtyFromAlg2, "getKtyFromAlg");
-function isJWKSLike2(jwks) {
-  return jwks && typeof jwks === "object" && Array.isArray(jwks.keys) && jwks.keys.every(isJWKLike2);
-}
-__name(isJWKSLike2, "isJWKSLike");
-function isJWKLike2(key) {
-  return isObject2(key);
-}
-__name(isJWKLike2, "isJWKLike");
-function clone2(obj) {
-  if (typeof structuredClone === "function") {
-    return structuredClone(obj);
-  }
-  return JSON.parse(JSON.stringify(obj));
-}
-__name(clone2, "clone");
-var LocalJWKSet2 = class {
-  static {
-    __name(this, "LocalJWKSet");
-  }
-  constructor(jwks) {
-    this._cached = /* @__PURE__ */ new WeakMap();
-    if (!isJWKSLike2(jwks)) {
-      throw new JWKSInvalid2("JSON Web Key Set malformed");
-    }
-    this._jwks = clone2(jwks);
-  }
-  async getKey(protectedHeader, token) {
-    const { alg, kid } = { ...protectedHeader, ...token?.header };
-    const kty = getKtyFromAlg2(alg);
-    const candidates = this._jwks.keys.filter((jwk2) => {
-      let candidate = kty === jwk2.kty;
-      if (candidate && typeof kid === "string") {
-        candidate = kid === jwk2.kid;
-      }
-      if (candidate && typeof jwk2.alg === "string") {
-        candidate = alg === jwk2.alg;
-      }
-      if (candidate && typeof jwk2.use === "string") {
-        candidate = jwk2.use === "sig";
-      }
-      if (candidate && Array.isArray(jwk2.key_ops)) {
-        candidate = jwk2.key_ops.includes("verify");
-      }
-      if (candidate && alg === "EdDSA") {
-        candidate = jwk2.crv === "Ed25519" || jwk2.crv === "Ed448";
-      }
-      if (candidate) {
-        switch (alg) {
-          case "ES256":
-            candidate = jwk2.crv === "P-256";
-            break;
-          case "ES256K":
-            candidate = jwk2.crv === "secp256k1";
-            break;
-          case "ES384":
-            candidate = jwk2.crv === "P-384";
-            break;
-          case "ES512":
-            candidate = jwk2.crv === "P-521";
-            break;
-        }
-      }
-      return candidate;
-    });
-    const { 0: jwk, length } = candidates;
-    if (length === 0) {
-      throw new JWKSNoMatchingKey2();
-    }
-    if (length !== 1) {
-      const error = new JWKSMultipleMatchingKeys2();
-      const { _cached } = this;
-      error[Symbol.asyncIterator] = async function* () {
-        for (const jwk2 of candidates) {
-          try {
-            yield await importWithAlgCache2(_cached, jwk2, alg);
-          } catch {
-          }
-        }
-      };
-      throw error;
-    }
-    return importWithAlgCache2(this._cached, jwk, alg);
-  }
-};
-async function importWithAlgCache2(cache, jwk, alg) {
-  const cached = cache.get(jwk) || cache.set(jwk, {}).get(jwk);
-  if (cached[alg] === void 0) {
-    const key = await importJWK2({ ...jwk, ext: true }, alg);
-    if (key instanceof Uint8Array || key.type !== "public") {
-      throw new JWKSInvalid2("JSON Web Key Set members must be public keys");
-    }
-    cached[alg] = key;
-  }
-  return cached[alg];
-}
-__name(importWithAlgCache2, "importWithAlgCache");
-function createLocalJWKSet2(jwks) {
-  const set = new LocalJWKSet2(jwks);
-  const localJWKSet = /* @__PURE__ */ __name(async (protectedHeader, token) => set.getKey(protectedHeader, token), "localJWKSet");
-  Object.defineProperties(localJWKSet, {
-    jwks: {
-      value: /* @__PURE__ */ __name(() => clone2(set._jwks), "value"),
-      enumerable: true,
-      configurable: false,
-      writable: false
-    }
-  });
-  return localJWKSet;
-}
-__name(createLocalJWKSet2, "createLocalJWKSet");
-var exports_base64url2 = {};
-__export2(exports_base64url2, {
-  encode: /* @__PURE__ */ __name(() => encode22, "encode"),
-  decode: /* @__PURE__ */ __name(() => decode22, "decode")
-});
-var encode22 = encode3;
-var decode22 = decode3;
-function decodeJwt2(jwt) {
-  if (typeof jwt !== "string")
-    throw new JWTInvalid2("JWTs must use Compact JWS serialization, JWT must be a string");
-  const { 1: payload, length } = jwt.split(".");
-  if (length === 5)
-    throw new JWTInvalid2("Only JWTs using Compact JWS serialization can be decoded");
-  if (length !== 3)
-    throw new JWTInvalid2("Invalid JWT");
-  if (!payload)
-    throw new JWTInvalid2("JWTs must contain a payload");
-  let decoded;
-  try {
-    decoded = decode22(payload);
-  } catch {
-    throw new JWTInvalid2("Failed to base64url decode the payload");
-  }
-  let result;
-  try {
-    result = JSON.parse(decoder2.decode(decoded));
-  } catch {
-    throw new JWTInvalid2("Failed to parse the decoded payload as JSON");
-  }
-  if (!isObject2(result))
-    throw new JWTInvalid2("Invalid JWT Claims Set");
-  return result;
-}
-__name(decodeJwt2, "decodeJwt");
-var InvalidSubjectError2 = class extends Error {
-  static {
-    __name(this, "InvalidSubjectError");
-  }
-  constructor() {
-    super("Invalid subject");
-  }
-};
-var InvalidRefreshTokenError2 = class extends Error {
-  static {
-    __name(this, "InvalidRefreshTokenError");
-  }
-  constructor() {
-    super("Invalid refresh token");
-  }
-};
-var InvalidAccessTokenError2 = class extends Error {
-  static {
-    __name(this, "InvalidAccessTokenError");
-  }
-  constructor() {
-    super("Invalid access token");
-  }
-};
-var InvalidAuthorizationCodeError2 = class extends Error {
-  static {
-    __name(this, "InvalidAuthorizationCodeError");
-  }
-  constructor() {
-    super("Invalid authorization code");
-  }
-};
-function generateVerifier2(length) {
-  const buffer = new Uint8Array(length);
-  crypto.getRandomValues(buffer);
-  return exports_base64url2.encode(buffer);
-}
-__name(generateVerifier2, "generateVerifier");
-async function generateChallenge2(verifier, method) {
-  if (method === "plain")
-    return verifier;
-  const encoder22 = new TextEncoder();
-  const data = encoder22.encode(verifier);
-  const hash = await crypto.subtle.digest("SHA-256", data);
-  return exports_base64url2.encode(new Uint8Array(hash));
-}
-__name(generateChallenge2, "generateChallenge");
-async function generatePKCE2(length = 64) {
-  if (length < 43 || length > 128) {
-    throw new Error("Code verifier length must be between 43 and 128 characters");
-  }
-  const verifier = generateVerifier2(length);
-  const challenge = await generateChallenge2(verifier, "S256");
-  return {
-    verifier,
-    challenge,
-    method: "S256"
-  };
-}
-__name(generatePKCE2, "generatePKCE");
-function createClient2(input) {
-  const jwksCache = /* @__PURE__ */ new Map();
-  const issuerCache = /* @__PURE__ */ new Map();
-  const issuer = input.issuer || process.env.OPENAUTH_ISSUER;
-  if (!issuer)
-    throw new Error("No issuer");
-  const f = input.fetch ?? fetch;
-  async function getIssuer() {
-    const cached = issuerCache.get(issuer);
-    if (cached)
-      return cached;
-    const wellKnown = await (f || fetch)(`${issuer}/.well-known/oauth-authorization-server`).then((r) => r.json());
-    issuerCache.set(issuer, wellKnown);
-    return wellKnown;
-  }
-  __name(getIssuer, "getIssuer");
-  async function getJWKS() {
-    const wk = await getIssuer();
-    const cached = jwksCache.get(issuer);
-    if (cached)
-      return cached;
-    const keyset = await (f || fetch)(wk.jwks_uri).then((r) => r.json());
-    const result2 = createLocalJWKSet2(keyset);
-    jwksCache.set(issuer, result2);
-    return result2;
-  }
-  __name(getJWKS, "getJWKS");
-  const result = {
-    async authorize(redirectURI, response, opts) {
-      const result2 = new URL(issuer + "/authorize");
-      const challenge = {
-        state: crypto.randomUUID()
-      };
-      result2.searchParams.set("client_id", input.clientID);
-      result2.searchParams.set("redirect_uri", redirectURI);
-      result2.searchParams.set("response_type", response);
-      result2.searchParams.set("state", challenge.state);
-      if (opts?.provider)
-        result2.searchParams.set("provider", opts.provider);
-      if (opts?.pkce && response === "code") {
-        const pkce = await generatePKCE2();
-        result2.searchParams.set("code_challenge_method", "S256");
-        result2.searchParams.set("code_challenge", pkce.challenge);
-        challenge.verifier = pkce.verifier;
-      }
-      return {
-        challenge,
-        url: result2.toString()
-      };
-    },
-    async pkce(redirectURI, opts) {
-      const result2 = new URL(issuer + "/authorize");
-      if (opts?.provider)
-        result2.searchParams.set("provider", opts.provider);
-      result2.searchParams.set("client_id", input.clientID);
-      result2.searchParams.set("redirect_uri", redirectURI);
-      result2.searchParams.set("response_type", "code");
-      const pkce = await generatePKCE2();
-      result2.searchParams.set("code_challenge_method", "S256");
-      result2.searchParams.set("code_challenge", pkce.challenge);
-      return [pkce.verifier, result2.toString()];
-    },
-    async exchange(code, redirectURI, verifier) {
-      const tokens = await f(issuer + "/token", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded"
-        },
-        body: new URLSearchParams({
-          code,
-          redirect_uri: redirectURI,
-          grant_type: "authorization_code",
-          client_id: input.clientID,
-          code_verifier: verifier || ""
-        }).toString()
-      });
-      const json = await tokens.json();
-      if (!tokens.ok) {
-        return {
-          err: new InvalidAuthorizationCodeError2()
-        };
-      }
-      return {
-        err: false,
-        tokens: {
-          access: json.access_token,
-          refresh: json.refresh_token,
-          expiresIn: json.expires_in
-        }
-      };
-    },
-    async refresh(refresh, opts) {
-      if (opts && opts.access) {
-        const decoded = decodeJwt2(opts.access);
-        if (!decoded) {
-          return {
-            err: new InvalidAccessTokenError2()
-          };
-        }
-        if ((decoded.exp || 0) > Date.now() / 1e3 + 30) {
-          return {
-            err: false
-          };
-        }
-      }
-      const tokens = await f(issuer + "/token", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded"
-        },
-        body: new URLSearchParams({
-          grant_type: "refresh_token",
-          refresh_token: refresh
-        }).toString()
-      });
-      const json = await tokens.json();
-      if (!tokens.ok) {
-        return {
-          err: new InvalidRefreshTokenError2()
-        };
-      }
-      return {
-        err: false,
-        tokens: {
-          access: json.access_token,
-          refresh: json.refresh_token,
-          expiresIn: json.expires_in
-        }
-      };
-    },
-    async verify(subjects3, token, options) {
-      const jwks = await getJWKS();
-      try {
-        const result2 = await jwtVerify2(token, jwks, {
-          issuer
-        });
-        const validated = await subjects3[result2.payload.type]["~standard"].validate(result2.payload.properties);
-        if (!validated.issues && result2.payload.mode === "access")
-          return {
-            aud: result2.payload.aud,
-            subject: {
-              type: result2.payload.type,
-              properties: validated.value
-            }
-          };
-        return {
-          err: new InvalidSubjectError2()
-        };
-      } catch (e) {
-        if (e instanceof exports_errors2.JWTExpired && options?.refresh) {
-          const refreshed = await this.refresh(options.refresh);
-          if (refreshed.err)
-            return refreshed;
-          const verified = await result.verify(subjects3, refreshed.tokens.access, {
-            refresh: refreshed.tokens.refresh,
-            issuer,
-            fetch: options?.fetch
-          });
-          if (verified.err)
-            return verified;
-          verified.tokens = refreshed.tokens;
-          return verified;
-        }
-        return {
-          err: new InvalidAccessTokenError2()
-        };
-      }
-    }
-  };
-  return result;
-}
-__name(createClient2, "createClient");
-function createSubjects2(types22) {
-  return { ...types22 };
-}
-__name(createSubjects2, "createSubjects");
-var store$42;
-function getGlobalConfig2(config$1) {
-  return {
-    lang: config$1?.lang ?? store$42?.lang,
-    message: config$1?.message,
-    abortEarly: config$1?.abortEarly ?? store$42?.abortEarly,
-    abortPipeEarly: config$1?.abortPipeEarly ?? store$42?.abortPipeEarly
-  };
-}
-__name(getGlobalConfig2, "getGlobalConfig");
-var store$32;
-function getGlobalMessage2(lang) {
-  return store$32?.get(lang);
-}
-__name(getGlobalMessage2, "getGlobalMessage");
-var store$22;
-function getSchemaMessage2(lang) {
-  return store$22?.get(lang);
-}
-__name(getSchemaMessage2, "getSchemaMessage");
-var store$12;
-function getSpecificMessage2(reference, lang) {
-  return store$12?.get(reference)?.get(lang);
-}
-__name(getSpecificMessage2, "getSpecificMessage");
-function _stringify2(input) {
-  const type = typeof input;
-  if (type === "string")
-    return `"${input}"`;
-  if (type === "number" || type === "bigint" || type === "boolean")
-    return `${input}`;
-  if (type === "object" || type === "function")
-    return (input && Object.getPrototypeOf(input)?.constructor?.name) ?? "null";
-  return type;
-}
-__name(_stringify2, "_stringify");
-function _addIssue2(context, label, dataset, config$1, other) {
-  const input = other && "input" in other ? other.input : dataset.value;
-  const expected = other?.expected ?? context.expects ?? null;
-  const received = other?.received ?? /* @__PURE__ */ _stringify2(input);
-  const issue = {
-    kind: context.kind,
-    type: context.type,
-    input,
-    expected,
-    received,
-    message: `Invalid ${label}: ${expected ? `Expected ${expected} but r` : "R"}eceived ${received}`,
-    requirement: context.requirement,
-    path: other?.path,
-    issues: other?.issues,
-    lang: config$1.lang,
-    abortEarly: config$1.abortEarly,
-    abortPipeEarly: config$1.abortPipeEarly
-  };
-  const isSchema = context.kind === "schema";
-  const message$1 = other?.message ?? context.message ?? /* @__PURE__ */ getSpecificMessage2(context.reference, issue.lang) ?? (isSchema ? /* @__PURE__ */ getSchemaMessage2(issue.lang) : null) ?? config$1.message ?? /* @__PURE__ */ getGlobalMessage2(issue.lang);
-  if (message$1 !== void 0)
-    issue.message = typeof message$1 === "function" ? message$1(issue) : message$1;
-  if (isSchema)
-    dataset.typed = false;
-  if (dataset.issues)
-    dataset.issues.push(issue);
-  else
-    dataset.issues = [issue];
-}
-__name(_addIssue2, "_addIssue");
-function _getStandardProps2(context) {
-  return {
-    version: 1,
-    vendor: "valibot",
-    validate(value$1) {
-      return context["~run"]({ value: value$1 }, /* @__PURE__ */ getGlobalConfig2());
-    }
-  };
-}
-__name(_getStandardProps2, "_getStandardProps");
-function getFallback2(schema, dataset, config$1) {
-  return typeof schema.fallback === "function" ? schema.fallback(dataset, config$1) : schema.fallback;
-}
-__name(getFallback2, "getFallback");
-function getDefault2(schema, dataset, config$1) {
-  return typeof schema.default === "function" ? schema.default(dataset, config$1) : schema.default;
-}
-__name(getDefault2, "getDefault");
-function object2(entries$1, message$1) {
-  return {
-    kind: "schema",
-    type: "object",
-    reference: object2,
-    expects: "Object",
-    async: false,
-    entries: entries$1,
-    message: message$1,
-    get "~standard"() {
-      return /* @__PURE__ */ _getStandardProps2(this);
-    },
-    "~run"(dataset, config$1) {
-      const input = dataset.value;
-      if (input && typeof input === "object") {
-        dataset.typed = true;
-        dataset.value = {};
-        for (const key in this.entries) {
-          const valueSchema = this.entries[key];
-          if (key in input || (valueSchema.type === "exact_optional" || valueSchema.type === "optional" || valueSchema.type === "nullish") && valueSchema.default !== void 0) {
-            const value$1 = key in input ? input[key] : /* @__PURE__ */ getDefault2(valueSchema);
-            const valueDataset = valueSchema["~run"]({ value: value$1 }, config$1);
-            if (valueDataset.issues) {
-              const pathItem = {
-                type: "object",
-                origin: "value",
-                input,
-                key,
-                value: value$1
-              };
-              for (const issue of valueDataset.issues) {
-                if (issue.path)
-                  issue.path.unshift(pathItem);
-                else
-                  issue.path = [pathItem];
-                dataset.issues?.push(issue);
-              }
-              if (!dataset.issues)
-                dataset.issues = valueDataset.issues;
-              if (config$1.abortEarly) {
-                dataset.typed = false;
-                break;
-              }
-            }
-            if (!valueDataset.typed)
-              dataset.typed = false;
-            dataset.value[key] = valueDataset.value;
-          } else if (valueSchema.fallback !== void 0)
-            dataset.value[key] = /* @__PURE__ */ getFallback2(valueSchema);
-          else if (valueSchema.type !== "exact_optional" && valueSchema.type !== "optional" && valueSchema.type !== "nullish") {
-            _addIssue2(this, "key", dataset, config$1, {
-              input: void 0,
-              expected: `"${key}"`,
-              path: [{
-                type: "object",
-                origin: "key",
-                input,
-                key,
-                value: input[key]
-              }]
-            });
-            if (config$1.abortEarly)
-              break;
-          }
-        }
-      } else
-        _addIssue2(this, "type", dataset, config$1);
-      return dataset;
-    }
-  };
-}
-__name(object2, "object");
-function string2(message$1) {
-  return {
-    kind: "schema",
-    type: "string",
-    reference: string2,
-    expects: "string",
-    async: false,
-    message: message$1,
-    get "~standard"() {
-      return /* @__PURE__ */ _getStandardProps2(this);
-    },
-    "~run"(dataset, config$1) {
-      if (typeof dataset.value === "string")
-        dataset.typed = true;
-      else
-        _addIssue2(this, "type", dataset, config$1);
-      return dataset;
-    }
-  };
-}
-__name(string2, "string");
-var client2 = createClient2({
-  clientID: "test-id",
-  issuer: "http://localhost:8787"
-});
-var subjects2 = createSubjects2({
-  user: object2({
-    id: string2()
-  })
-});
-var onRequest2 = /* @__PURE__ */ __name((ctx) => new AuthManager2({
+var onRequest2 = /* @__PURE__ */ __name((ctx) => new AuthManager({
   issuer: "http://localhost:8787",
   redirectURI: "http://localhost:3001/frontend-auth/callback",
-  client: client2,
+  client,
   publicPath: "/auth",
   callback: {
     onError(error) {
@@ -3526,7 +1786,7 @@ var onRequest2 = /* @__PURE__ */ __name((ctx) => new AuthManager2({
     }
   },
   verify: {
-    subjects: subjects2,
+    subjects,
     onSuccess(user) {
       console.log("Verified user:", user);
       return Response.json(user.subject.properties);
@@ -3538,7 +1798,7 @@ var onRequest2 = /* @__PURE__ */ __name((ctx) => new AuthManager2({
   }
 }).run(ctx.request), "onRequest");
 
-// ../.wrangler/tmp/pages-11wlKH/functionsRoutes-0.5490481667305693.mjs
+// ../.wrangler/tmp/pages-c5BdHQ/functionsRoutes-0.3416219295738617.mjs
 var routes = [
   {
     routePath: "/auth/:action",
@@ -3641,7 +1901,7 @@ function lexer(str) {
   return tokens;
 }
 __name(lexer, "lexer");
-function parse3(str, options) {
+function parse2(str, options) {
   if (options === void 0) {
     options = {};
   }
@@ -3740,7 +2000,7 @@ function parse3(str, options) {
   }
   return result;
 }
-__name(parse3, "parse");
+__name(parse2, "parse");
 function match(str, options) {
   var keys = [];
   var re = pathToRegexp(str, keys, options);
@@ -3751,7 +2011,7 @@ function regexpToFunction(re, keys, options) {
   if (options === void 0) {
     options = {};
   }
-  var _a = options.decode, decode4 = _a === void 0 ? function(x) {
+  var _a = options.decode, decode3 = _a === void 0 ? function(x) {
     return x;
   } : _a;
   return function(pathname) {
@@ -3766,10 +2026,10 @@ function regexpToFunction(re, keys, options) {
       var key = keys[i2 - 1];
       if (key.modifier === "*" || key.modifier === "+") {
         params[key.name] = m[i2].split(key.prefix + key.suffix).map(function(value) {
-          return decode4(value, key);
+          return decode3(value, key);
         });
       } else {
-        params[key.name] = decode4(m[i2], key);
+        params[key.name] = decode3(m[i2], key);
       }
     }, "_loop_1");
     for (var i = 1; i < m.length; i++) {
@@ -3815,14 +2075,14 @@ function arrayToRegexp(paths, keys, options) {
 }
 __name(arrayToRegexp, "arrayToRegexp");
 function stringToRegexp(path, keys, options) {
-  return tokensToRegexp(parse3(path, options), keys, options);
+  return tokensToRegexp(parse2(path, options), keys, options);
 }
 __name(stringToRegexp, "stringToRegexp");
 function tokensToRegexp(tokens, keys, options) {
   if (options === void 0) {
     options = {};
   }
-  var _a = options.strict, strict = _a === void 0 ? false : _a, _b = options.start, start = _b === void 0 ? true : _b, _c = options.end, end = _c === void 0 ? true : _c, _d = options.encode, encode4 = _d === void 0 ? function(x) {
+  var _a = options.strict, strict = _a === void 0 ? false : _a, _b = options.start, start = _b === void 0 ? true : _b, _c = options.end, end = _c === void 0 ? true : _c, _d = options.encode, encode3 = _d === void 0 ? function(x) {
     return x;
   } : _d, _e = options.delimiter, delimiter = _e === void 0 ? "/#?" : _e, _f = options.endsWith, endsWith = _f === void 0 ? "" : _f;
   var endsWithRe = "[".concat(escapeString(endsWith), "]|$");
@@ -3831,10 +2091,10 @@ function tokensToRegexp(tokens, keys, options) {
   for (var _i = 0, tokens_1 = tokens; _i < tokens_1.length; _i++) {
     var token = tokens_1[_i];
     if (typeof token === "string") {
-      route += escapeString(encode4(token));
+      route += escapeString(encode3(token));
     } else {
-      var prefix = escapeString(encode4(token.prefix));
-      var suffix = escapeString(encode4(token.suffix));
+      var prefix = escapeString(encode3(token.prefix));
+      var suffix = escapeString(encode3(token.suffix));
       if (token.pattern) {
         if (keys)
           keys.push(token);
@@ -4043,7 +2303,7 @@ var jsonError = /* @__PURE__ */ __name(async (request, env, _ctx, middlewareCtx)
 }, "jsonError");
 var middleware_miniflare3_json_error_default = jsonError;
 
-// ../.wrangler/tmp/bundle-PxPjmq/middleware-insertion-facade.js
+// ../.wrangler/tmp/bundle-rCFtrl/middleware-insertion-facade.js
 var __INTERNAL_WRANGLER_MIDDLEWARE__ = [
   middleware_ensure_req_body_drained_default,
   middleware_miniflare3_json_error_default
@@ -4075,7 +2335,7 @@ function __facade_invoke__(request, env, ctx, dispatch, finalMiddleware) {
 }
 __name(__facade_invoke__, "__facade_invoke__");
 
-// ../.wrangler/tmp/bundle-PxPjmq/middleware-loader.entry.ts
+// ../.wrangler/tmp/bundle-rCFtrl/middleware-loader.entry.ts
 var __Facade_ScheduledController__ = class ___Facade_ScheduledController__ {
   constructor(scheduledTime, cron, noRetry) {
     this.scheduledTime = scheduledTime;
@@ -4175,4 +2435,4 @@ export {
   __INTERNAL_WRANGLER_MIDDLEWARE__,
   middleware_loader_entry_default as default
 };
-//# sourceMappingURL=functionsWorker-0.8820124804956798.mjs.map
+//# sourceMappingURL=functionsWorker-0.4643459197907017.mjs.map

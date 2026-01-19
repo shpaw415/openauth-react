@@ -1,6 +1,6 @@
 import { useRef, useState, useEffect, useContext, createContext } from "react";
 import { createClient } from "@openauthjs/openauth/client";
-import type { AuthContextType, AuthProviderProps } from "./types";
+import type { AuthContextType, AuthProviderProps, SessionData } from "./types";
 import Cookies from "js-cookie";
 
 const AuthContext = createContext(null as unknown as AuthContextType);
@@ -12,12 +12,13 @@ export function AuthProvider({
   callbackRedirectURI = "/auth",
   isFrontendCallback = false,
   userInfoEndpoint,
+  userInfoParser,
 }: AuthProviderProps) {
   const initializing = useRef(true);
   const [loaded, setLoaded] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
   const token = useRef<string | undefined>(undefined);
-  const [userId, setUserId] = useState<string | undefined>();
+  const [userData, setUserData] = useState<SessionData | undefined>();
   const _client_ = useRef(
     createClient({
       clientID,
@@ -129,8 +130,10 @@ export function AuthProvider({
     });
 
     if (res.ok) {
-      setUserId(await res.text());
+      setUserData(userInfoParser ? userInfoParser(res) : await res.json());
       setLoggedIn(true);
+    } else {
+      setLoggedIn(false);
     }
   }
 
@@ -145,7 +148,7 @@ export function AuthProvider({
       value={{
         login,
         logout,
-        userId,
+        userData,
         loaded,
         loggedIn,
         getToken,

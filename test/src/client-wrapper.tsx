@@ -11,7 +11,9 @@ export default function ClientWrapper({ children }: { children: JSX.Element }) {
       <AuthProvider
         clientID="test-id"
         issuer="http://localhost:8787"
-        publicPath="/frontend-auth"
+        callbackRedirectURI="/frontend-auth/callback"
+        userInfoEndpoint="/auth"
+        isFrontendCallback
       >
         <RouterHost>{children}</RouterHost>
       </AuthProvider>

@@ -10,34 +10,7 @@ export type AuthManagerProps<Schema extends ReturnType<typeof createSubjects>> =
   {
     client: Client;
     issuer: string;
-    /**
-     * Callback handler for processing the OAuth2 callback.
-     *
-     * @example
-     * ```ts
-     * {
-     *   onSuccess: (success) => {
-     *     console.log("Successfully exchanged code for tokens", success);
-     *   },
-     *   onError: (error) => {
-     *     console.error("Failed to exchange code for tokens", error);
-     *   },
-     *   response: {
-     *     init: {
-     *       status: 302,
-     *       headers: {},
-     *     },
-     *     body: null,
-     *   },
-     * }
-     * ```
-     */
-    callback: Omit<callbackHandlerProps, "request">;
-    /**
-     * Public path for the endpoint.
-     * @default "/auth"
-     */
-    publicPath?: string;
+    redirectURI: string;
     verify: {
       /**
        * Create a subject schema.
@@ -71,12 +44,39 @@ export type AuthManagerProps<Schema extends ReturnType<typeof createSubjects>> =
         error: ExchangeError,
       ) => Response | Promise<Response | void> | void;
     };
-    redirectURI: string;
+    /**
+     * Public path for the endpoint.
+     * @default "/auth"
+     */
+    publicPath?: string;
+    /**
+     * Callback handler for processing the OAuth2 callback.
+     *
+     * @example
+     * ```ts
+     * {
+     *   onSuccess: (success) => {
+     *     console.log("Successfully exchanged code for tokens", success);
+     *   },
+     *   onError: (error) => {
+     *     console.error("Failed to exchange code for tokens", error);
+     *   },
+     *   response: {
+     *     init: {
+     *       status: 302,
+     *       headers: {},
+     *     },
+     *     body: null,
+     *   },
+     * }
+     * ```
+     */
+    callback?: Omit<callbackHandlerProps, "request">;
   };
 
 export type callbackHandlerProps = {
-  onSuccess: (success: ExchangeSuccess) => void;
-  onError: (error: ExchangeError | Error) => void | Promise<void>;
+  onSuccess?: (success: ExchangeSuccess) => Promise<void> | void;
+  onError?: (error: ExchangeError | Error) => void | Promise<void>;
   request: Request;
   response?: {
     init: ResponseInit;
@@ -88,7 +88,7 @@ export class AuthManager<Schema extends ReturnType<typeof createSubjects>> {
   client: Client;
   redirectURI: string;
   props: {
-    callback: Omit<callbackHandlerProps, "request">;
+    callback?: Omit<callbackHandlerProps, "request">;
     verify: AuthManagerProps<Schema>["verify"];
   };
   publicPath: string;
@@ -136,10 +136,10 @@ export class AuthManager<Schema extends ReturnType<typeof createSubjects>> {
       });
       response.headers.set("Location", url.origin);
       setSession(response, exchanged.tokens.access, exchanged.tokens.refresh);
-      onSuccess(exchanged);
+      await onSuccess?.(exchanged);
       return response;
     } catch (e) {
-      await onError((e as Error).cause as ExchangeError);
+      await onError?.((e as Error).cause as ExchangeError);
       throw e;
     }
   }
