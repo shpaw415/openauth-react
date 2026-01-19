@@ -1,0 +1,28 @@
+{
+  "name": "cloudflare-pages-react-tailwind",
+  "private": true,
+  "version": "1.0.2",
+  "devDependencies": {
+    "@types/bun": "latest",
+    "@types/react": "^19.2.8",
+    "@types/react-dom": "^19.2.3",
+    "wrangler": "^4.59.2",
+    "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "tailwindcss": "^4.1.18",
+    "@tailwindcss/cli": "^4.1.18",
+    "frame-master": "^3.1.1",
+    "frame-master-plugin-apply-react": "0.2.6",
+    "frame-master-plugin-react-to-html": "0.2.0",
+    "frame-master-plugin-tailwind": "1.1.2",
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3",
+    "openauth-react": "https://github.com/shpaw415/openauth-react.git"
+  },
+  "scripts": {
+    "dev": "NODE_ENV=development bun frame-master start",
+    "build": "NODE_ENV=production bun frame-master build",
+    "build:dev": "NODE_ENV=development bun frame-master build"
+  }
+}

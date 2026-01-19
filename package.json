@@ -16,7 +16,7 @@
     "@openauthjs/openauth": "^0.4.3"
   },
   "exports": {
-    "./client": "./src/index.ts",
+    "./client": "./src/index.tsx",
     "./types": "./src/types.ts",
     "./server/endpoint": "./src/endpoint.ts"
   }
