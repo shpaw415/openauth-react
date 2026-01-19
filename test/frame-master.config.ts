@@ -4,13 +4,6 @@ import ApplyReact from "frame-master-plugin-apply-react/plugin";
 import TailwindPlugin from "frame-master-plugin-tailwind";
 import actionPlugin from "frame-master-plugin-cloudflare-pages-functions-action";
 
-const doProxyFetch = async (req: Bun.BunRequest<string>) => {
-  const url = new URL(req.url);
-  url.hostname = "localhost";
-  url.port = "8788";
-  return fetch(url.toString(), req);
-};
-
 export default {
   HTTPServer: {
     port: 3001,
@@ -41,10 +34,20 @@ export default {
     {
       name: "dev-proxy-to-auth",
       version: "1.0.0",
-      serverConfig: {
-        routes: {
-          "/auth/*": doProxyFetch,
-          "/auth": doProxyFetch,
+      router: {
+        async request(master) {
+          if (!master.URL.pathname.startsWith("/auth")) return;
+          const url = new URL(master.request.url);
+          url.port = "8788";
+
+          const res = await fetch(url.toString(), master.request);
+
+          master.setResponse(Bun.gzipSync(await res.arrayBuffer()), {
+            status: res.status,
+            headers: {
+              ...Object.fromEntries(res.headers),
+            },
+          });
         },
       },
     },

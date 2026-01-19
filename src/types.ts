@@ -12,7 +12,7 @@ export type AuthProviderProps = {
   clientID: string;
   issuer: string;
   /**
-   * The public path where the auth endpoints are hosted.
+   * The callback redirect URI where it should trigger the token exchange.
    *
    * **Must match the redirectURI for the Auth flow.**
    *
@@ -22,7 +22,7 @@ export type AuthProviderProps = {
    *
    * @default "/auth"
    */
-  publicPath?: string;
+  callbackRedirectURI?: string;
   /**
    *  Indicates whether the callback is being handled on the front-end or back-end.
    *
@@ -34,7 +34,7 @@ export type AuthProviderProps = {
   /**
    * UserInfo endpoint to fetch user information.
    *
-   * If not provided, the `publicPath` URL will be used.
+   * If not provided, the `callbackRedirectURI` URL will be used.
    */
   userInfoEndpoint?: string;
 };

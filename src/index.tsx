@@ -1,6 +1,7 @@
 import { useRef, useState, useEffect, useContext, createContext } from "react";
 import { createClient } from "@openauthjs/openauth/client";
 import type { AuthContextType, AuthProviderProps } from "./types";
+import Cookies from "js-cookie";
 
 const AuthContext = createContext(null as unknown as AuthContextType);
 
@@ -8,7 +9,7 @@ export function AuthProvider({
   children,
   clientID,
   issuer,
-  publicPath = "/auth",
+  callbackRedirectURI = "/auth",
   isFrontendCallback = false,
   userInfoEndpoint,
 }: AuthProviderProps) {
@@ -82,9 +83,9 @@ export function AuthProvider({
 
   async function login() {
     const { challenge, url } = await client.authorize(
-      publicPath.startsWith("http")
-        ? publicPath + "/callback"
-        : location.origin + `${publicPath}/callback`,
+      callbackRedirectURI.startsWith("http")
+        ? callbackRedirectURI
+        : location.origin + `${callbackRedirectURI}`,
       "code",
       {
         pkce: isFrontendCallback,
@@ -100,16 +101,20 @@ export function AuthProvider({
       if (state === challenge.state && challenge.verifier) {
         const exchanged = await client.exchange(
           code!,
-          publicPath.startsWith("http")
-            ? publicPath + "/callback"
-            : location.origin + `${publicPath}/callback`,
+          callbackRedirectURI.startsWith("http")
+            ? callbackRedirectURI
+            : location.origin + `${callbackRedirectURI}`,
           challenge.verifier,
         );
         if (!exchanged.err) {
           token.current = exchanged.tokens?.access;
           localStorage.setItem("refresh", exchanged.tokens.refresh);
-          window.cookieStore.set("access_token", exchanged.tokens!.access);
-          window.cookieStore.set("refresh_token", exchanged.tokens!.refresh);
+          Cookies.set("access_token", exchanged.tokens!.access, {
+            path: "/",
+          });
+          Cookies.set("refresh_token", exchanged.tokens!.refresh, {
+            path: "/",
+          });
         }
       }
       window.location.replace("/");
@@ -117,7 +122,7 @@ export function AuthProvider({
   }
 
   async function user() {
-    const res = await fetch(userInfoEndpoint ?? publicPath, {
+    const res = await fetch(userInfoEndpoint ?? callbackRedirectURI, {
       headers: {
         Authorization: `Bearer ${token.current}`,
       },
