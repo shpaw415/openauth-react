@@ -11,7 +11,7 @@
         "frame-master-plugin-cloudflare-pages-functions-action": "^0.2.1",
         "frame-master-plugin-react-to-html": "0.2.0",
         "frame-master-plugin-tailwind": "1.1.2",
-        "openauth-react": "https://github.com/shpaw415/openauth-react.git#8a2f0ff",
+        "openauth-react": "https://github.com/shpaw415/openauth-react.git#ca7096c",
         "react": "^19.2.3",
         "react-dom": "^19.2.3",
         "tailwindcss": "^4.1.18",
@@ -423,7 +423,7 @@
 
     "npm": ["npm@11.6.2", "", { "dependencies": { "@isaacs/string-locale-compare": "^1.1.0", "@npmcli/arborist": "^9.1.6", "@npmcli/config": "^10.4.2", "@npmcli/fs": "^4.0.0", "@npmcli/map-workspaces": "^5.0.0", "@npmcli/package-json": "^7.0.1", "@npmcli/promise-spawn": "^8.0.3", "@npmcli/redact": "^3.2.2", "@npmcli/run-script": "^10.0.0", "@sigstore/tuf": "^4.0.0", "abbrev": "^3.0.1", "archy": "~1.0.0", "cacache": "^20.0.1", "chalk": "^5.6.2", "ci-info": "^4.3.1", "cli-columns": "^4.0.0", "fastest-levenshtein": "^1.0.16", "fs-minipass": "^3.0.3", "glob": "^11.0.3", "graceful-fs": "^4.2.11", "hosted-git-info": "^9.0.2", "ini": "^5.0.0", "init-package-json": "^8.2.2", "is-cidr": "^6.0.1", "json-parse-even-better-errors": "^4.0.0", "libnpmaccess": "^10.0.3", "libnpmdiff": "^8.0.9", "libnpmexec": "^10.1.8", "libnpmfund": "^7.0.9", "libnpmorg": "^8.0.1", "libnpmpack": "^9.0.9", "libnpmpublish": "^11.1.2", "libnpmsearch": "^9.0.1", "libnpmteam": "^8.0.2", "libnpmversion": "^8.0.2", "make-fetch-happen": "^15.0.2", "minimatch": "^10.0.3", "minipass": "^7.1.1", "minipass-pipeline": "^1.2.4", "ms": "^2.1.2", "node-gyp": "^11.4.2", "nopt": "^8.1.0", "npm-audit-report": "^6.0.0", "npm-install-checks": "^7.1.2", "npm-package-arg": "^13.0.1", "npm-pick-manifest": "^11.0.1", "npm-profile": "^12.0.0", "npm-registry-fetch": "^19.0.0", "npm-user-validate": "^3.0.0", "p-map": "^7.0.3", "pacote": "^21.0.3", "parse-conflict-json": "^4.0.0", "proc-log": "^5.0.0", "qrcode-terminal": "^0.12.0", "read": "^4.1.0", "semver": "^7.7.3", "spdx-expression-parse": "^4.0.0", "ssri": "^12.0.0", "supports-color": "^10.2.2", "tar": "^7.5.1", "text-table": "~0.2.0", "tiny-relative-date": "^2.0.2", "treeverse": "^3.0.0", "validate-npm-package-name": "^6.0.2", "which": "^5.0.0" }, "bin": { "npm": "bin/npm-cli.js", "npx": "bin/npx-cli.js" } }, "sha512-7iKzNfy8lWYs3zq4oFPa8EXZz5xt9gQNKJZau3B1ErLBb6bF7sBJ00x09485DOvRT2l5Gerbl3VlZNT57MxJVA=="],
 
-    "openauth-react": ["openauth-react@github:shpaw415/openauth-react#8a2f0ff", { "dependencies": { "@openauthjs/openauth": "^0.4.3" }, "peerDependencies": { "react": "^19.0.0", "react-dom": "^19.0.0", "typescript": "^5" } }, "shpaw415-openauth-react-8a2f0ff"],
+    "openauth-react": ["openauth-react@github:shpaw415/openauth-react#ca7096c", { "dependencies": { "@openauthjs/openauth": "^0.4.3" }, "peerDependencies": { "react": "^19.0.0", "react-dom": "^19.0.0", "typescript": "^5" } }, "shpaw415-openauth-react-ca7096c"],
 
     "path-to-regexp": ["path-to-regexp@6.3.0", "", {}, "sha512-Yhpw4T9C6hPpgPeA28us07OJeqZ5EzQTkbfwuhsUg0c237RomFoETJgmp2sa3F/41gfLE6G5cqcYwznmeEeOlQ=="],
 

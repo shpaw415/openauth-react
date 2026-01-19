@@ -4,7 +4,7 @@ import {
   subjects
 } from "../chunk-xvyxt2bp.js";
 
-// src/api/auth/index.ts
+// src/api/auth/[action].ts
 "no action";
 var onRequest = (ctx) => new AuthManager({
   issuer: "http://localhost:8787",

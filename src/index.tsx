@@ -79,9 +79,13 @@ export function AuthProvider({
   }
 
   async function login() {
-    const { challenge, url } = await client.authorize(location.origin, "code", {
-      pkce: true,
-    });
+    const { challenge, url } = await client.authorize(
+      location.origin + `${publicPath}/callback`,
+      "code",
+      {
+        pkce: true,
+      },
+    );
     sessionStorage.setItem("challenge", JSON.stringify(challenge));
     location.href = url;
   }
