@@ -8,7 +8,13 @@ import { StrictMode, type JSX } from "react";
 export default function ClientWrapper({ children }: { children: JSX.Element }) {
   return (
     <StrictMode>
-      <AuthProvider clientID="test-id" issuer="http://localhost:8787">
+      <AuthProvider
+        clientID="test-id"
+        issuer="http://localhost:8787"
+        publicPath="/frontend-auth"
+        isFrontendCallback
+        userInfoEndpoint="/auth"
+      >
         <RouterHost>{children}</RouterHost>
       </AuthProvider>
     </StrictMode>

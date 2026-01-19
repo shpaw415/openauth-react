@@ -8,19 +8,7 @@ const doProxyFetch = async (req: Bun.BunRequest<string>) => {
   const url = new URL(req.url);
   url.hostname = "localhost";
   url.port = "8788";
-  const res = await fetch(url.toString(), {
-    method: req.method,
-    headers: req.headers,
-    body: req.method !== "GET" && req.method !== "HEAD" ? req.body : undefined,
-  });
-
-  const text = await res.clone().text();
-
-  console.log(
-    `[Proxy] ${req.method} ${url.pathname} -> ${res.status}\n${text}`,
-  );
-
-  return res;
+  return fetch(url.toString(), req);
 };
 
 export default {

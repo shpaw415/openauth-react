@@ -14,7 +14,11 @@ export type AuthProviderProps = {
   /**
    * The public path where the auth endpoints are hosted.
    *
+   * **Must match the redirectURI for the Auth flow.**
+   *
    * External example: `http://my.api.com/api/auth`
+   *
+   * Internal example: `/auth`
    *
    * @default "/auth"
    */
@@ -27,6 +31,12 @@ export type AuthProviderProps = {
    * @default false
    */
   isFrontendCallback?: boolean;
+  /**
+   * UserInfo endpoint to fetch user information.
+   *
+   * If not provided, the `publicPath` URL will be used.
+   */
+  userInfoEndpoint?: string;
 };
 
 /**

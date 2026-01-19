@@ -10,6 +10,7 @@ export function AuthProvider({
   issuer,
   publicPath = "/auth",
   isFrontendCallback = false,
+  userInfoEndpoint,
 }: AuthProviderProps) {
   const initializing = useRef(true);
   const [loaded, setLoaded] = useState(false);
@@ -99,12 +100,16 @@ export function AuthProvider({
       if (state === challenge.state && challenge.verifier) {
         const exchanged = await client.exchange(
           code!,
-          location.origin,
+          publicPath.startsWith("http")
+            ? publicPath + "/callback"
+            : location.origin + `${publicPath}/callback`,
           challenge.verifier,
         );
         if (!exchanged.err) {
           token.current = exchanged.tokens?.access;
           localStorage.setItem("refresh", exchanged.tokens.refresh);
+          window.cookieStore.set("access_token", exchanged.tokens!.access);
+          window.cookieStore.set("refresh_token", exchanged.tokens!.refresh);
         }
       }
       window.location.replace("/");
@@ -112,7 +117,7 @@ export function AuthProvider({
   }
 
   async function user() {
-    const res = await fetch(`${publicPath}`, {
+    const res = await fetch(userInfoEndpoint ?? publicPath, {
       headers: {
         Authorization: `Bearer ${token.current}`,
       },

@@ -76,7 +76,7 @@ export type AuthManagerProps<Schema extends ReturnType<typeof createSubjects>> =
 
 export type callbackHandlerProps = {
   onSuccess: (success: ExchangeSuccess) => void;
-  onError: (error: ExchangeError) => void | Promise<void>;
+  onError: (error: ExchangeError | Error) => void | Promise<void>;
   request: Request;
   response?: {
     init: ResponseInit;

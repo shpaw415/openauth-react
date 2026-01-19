@@ -6,7 +6,7 @@ import { client, subjects } from "../../auth-client";
 export const onRequest: PagesFunction = (ctx) =>
   new AuthManager({
     issuer: "http://localhost:8787",
-    redirectURI: "http://localhost:3001/",
+    redirectURI: "http://localhost:3001",
     client,
     publicPath: "/auth",
     callback: {
