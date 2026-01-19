@@ -8,7 +8,7 @@ import { StrictMode, type JSX } from "react";
 export default function ClientWrapper({ children }: { children: JSX.Element }) {
   return (
     <StrictMode>
-      <AuthProvider clientID="test-id">
+      <AuthProvider clientID="test-id" issuer="http://localhost:8787">
         <RouterHost>{children}</RouterHost>
       </AuthProvider>
     </StrictMode>

@@ -17,8 +17,9 @@
     "noImplicitOverride": true,
     "noUnusedLocals": false,
     "noUnusedParameters": false,
-    "noPropertyAccessFromIndexSignature": false
+    "noPropertyAccessFromIndexSignature": false,
+    "types": ["./worker-configuration.d.ts"]
   },
   "include": ["src", ".frame-master/frame-master-custom-type.d.ts"],
-  "exclude": [".frame-master/build"]
+  "exclude": [".frame-master/build", "functions"]
 }

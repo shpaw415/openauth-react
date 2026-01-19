@@ -82,7 +82,6 @@ export type callbackHandlerProps = {
     init: ResponseInit;
     body: BodyInit | null;
   };
-  client: Client;
 };
 
 export class AuthManager<Schema extends ReturnType<typeof createSubjects>> {
@@ -114,11 +113,11 @@ export class AuthManager<Schema extends ReturnType<typeof createSubjects>> {
   }
 
   private async callback(props: callbackHandlerProps) {
-    const { onSuccess, onError, client } = props;
+    const { onSuccess, onError } = props;
     const url = new URL(props.request.url);
     const code = url.searchParams.get("code")!;
     try {
-      const exchanged = await client.exchange(code, this.redirectURI);
+      const exchanged = await this.client.exchange(code, this.redirectURI);
       if (exchanged.err) {
         throw new Error("Code exchange failed", { cause: exchanged });
       }

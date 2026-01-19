@@ -2,6 +2,7 @@ import type { FrameMasterConfig } from "frame-master/server/types";
 import ReactToHtml from "frame-master-plugin-react-to-html";
 import ApplyReact from "frame-master-plugin-apply-react/plugin";
 import TailwindPlugin from "frame-master-plugin-tailwind";
+import actionPlugin from "frame-master-plugin-cloudflare-pages-functions-action";
 
 export default {
   HTTPServer: {
@@ -24,6 +25,10 @@ export default {
         autoInjectInBuild: true,
         runtime: "bun",
       },
+    }),
+    actionPlugin({
+      actionBasePath: "src/api",
+      outDir: ".frame-master/build",
     }),
     {
       name: "static-assets",
