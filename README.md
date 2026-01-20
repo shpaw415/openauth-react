@@ -72,7 +72,7 @@ function Profile() {
 | ---------- | ------------------------------------ | ----------------------------------------------- |
 | `loaded`   | `boolean`                            | Whether the auth state has been initialized     |
 | `loggedIn` | `boolean`                            | Whether the user is currently authenticated     |
-| `userId`   | `string \| undefined`                | The authenticated user's ID                     |
+| `userData` | `unknown`                            | The authenticated user's ID                     |
 | `login`    | `() => Promise<void>`                | Initiates the OAuth login flow                  |
 | `logout`   | `() => void`                         | Logs out the user and clears tokens             |
 | `getToken` | `() => Promise<string \| undefined>` | Gets a valid access token (refreshes if needed) |
@@ -152,6 +152,43 @@ The server-side `AuthManager` automatically manages sessions using HttpOnly cook
 - `refresh_token` - The OAuth refresh token
 
 Both cookies are set with `HttpOnly`, `SameSite=Strict`, and `Path=/` for security.
+
+## Typescript Extention
+
+TypeSafe session data is very helpful here who it works
+
+### extending the SessionData type
+
+create a `d.ts` file and create an empty export object.
+
+```ts
+// types.d.ts
+declare module "openauth-react/types" {
+  interface SessionData {
+    id: string;
+    name: string;
+    surname: string;
+    username: string;
+    /**
+     * other session data types
+     */
+  }
+}
+// exporting is necessary
+export {};
+```
+
+### Set tsconfig.json
+
+extending the sessionData types adding types
+
+```json
+{
+  "compilerOptions": {
+    "types": ["./types.d.ts"]
+  }
+}
+```
 
 ## Requirements
 

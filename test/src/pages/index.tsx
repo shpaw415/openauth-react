@@ -14,7 +14,7 @@ function LogComponent() {
   return (
     <div>
       {auth?.loggedIn ? (
-        <p>Logged in as {auth.userId}</p>
+        <p>Logged in as {auth.userData?.id}</p>
       ) : (
         <>
           <p>Not logged in</p>

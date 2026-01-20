@@ -15,11 +15,12 @@
   },
   "dependencies": {
     "@openauthjs/openauth": "^0.4.3",
-    "js-cookie": "^3.0.5"
+    "js-cookie": "^3.0.5",
+    "openauth-endpoints": "https://github.com/shpaw415/openauth-endpoints.git"
   },
   "exports": {
     "./client": "./src/index.tsx",
     "./types": "./src/types.ts",
-    "./server/endpoint": "./src/endpoint.ts"
+    "./endpoint": "./src/endpoint.ts"
   }
 }

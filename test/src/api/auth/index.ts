@@ -9,10 +9,6 @@ export const onRequest: PagesFunction = (ctx) =>
     redirectURI: "http://localhost:3001/frontend-auth/callback",
     client,
     publicPath: "/auth",
-    callback: {
-      onError(error) {},
-      onSuccess(success) {},
-    },
     verify: {
       subjects,
       onSuccess(user) {

@@ -1,0 +1,17 @@
+{
+  "folders": [
+    {
+      "path": "../openauth",
+    },
+    {
+      "path": ".",
+    },
+    {
+      "path": "../../freelance/openauth-web-creation",
+    },
+    {
+      "path": "../openauth-endpoints",
+    },
+  ],
+  "settings": {},
+}
