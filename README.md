@@ -1,28 +1,30 @@
 # openauth-react
 
-React bindings for [OpenAuth](https://github.com/openauthjs/openauth) - a simple, secure authentication library.
+React provider for client-side session management with [OpenAuthJS](https://github.com/openauthjs/openauth). Compatible with [openauth-endpoints](https://github.com/shpaw415/openauth-endpoints) for full-stack authentication flows.
 
 ## Installation
 
 ```bash
-npm install openauth-react @openauthjs/openauth
-# or
-bun add openauth-react @openauthjs/openauth
+bun add openauth-react
+```
+
+```bash
+npm install openauth-react
 ```
 
 ## Features
 
-- 🔐 **Client-side authentication** with React Context API
-- 🍪 **Server-side session management** with HttpOnly cookies
-- 🔄 **Automatic token refresh** handling
-- 📦 **PKCE support** for secure OAuth2 flows
-- 🎯 **Type-safe** with full TypeScript support
+- 🔐 **React Context Provider** - Easy-to-use authentication state management
+- 🔄 **Automatic Token Refresh** - Seamlessly refreshes tokens when they expire
+- 🎯 **Flexible Callback Handling** - Support for both frontend and backend callback flows
+- 🍪 **Cookie Sync** - Automatically syncs tokens to cookies for SSR compatibility
+- 📦 **TypeScript First** - Full type safety with extensible session data
 
-## Client Usage
+## Usage
 
-### Setup the AuthProvider
+### Basic Setup
 
-Wrap your application with the `AuthProvider` component:
+Wrap your application with the `AuthProvider`:
 
 ```tsx
 import { AuthProvider } from "openauth-react/client";
@@ -31,7 +33,8 @@ function App() {
   return (
     <AuthProvider
       clientID="your-client-id"
-      issuer="https://your-auth-server.com"
+      issuer="https://your-issuer.com"
+      callbackRedirectURI="/auth/callback"
     >
       <YourApp />
     </AuthProvider>
@@ -39,162 +42,160 @@ function App() {
 }
 ```
 
-### Use the useAuth hook
+### Using the Auth Hook
 
-Access authentication state and methods anywhere in your app:
+Access authentication state and methods with the `useAuth` hook:
 
 ```tsx
 import { useAuth } from "openauth-react/client";
 
 function Profile() {
-  const { loaded, loggedIn, userId, login, logout, getToken } = useAuth();
+  const auth = useAuth();
 
-  if (!loaded) {
+  if (!auth?.loaded) {
     return <div>Loading...</div>;
   }
 
-  if (!loggedIn) {
-    return <button onClick={login}>Login</button>;
+  if (!auth.loggedIn) {
+    return <button onClick={auth.login}>Login</button>;
   }
 
   return (
     <div>
-      <p>Welcome, {userId}!</p>
-      <button onClick={logout}>Logout</button>
+      <p>Welcome, {auth.userData?.name}</p>
+      <button onClick={auth.logout}>Logout</button>
     </div>
   );
 }
 ```
 
-### Auth Context API
+### Getting Access Tokens
+
+Use `getToken()` to get a valid access token for API calls:
+
+```tsx
+import { useAuth } from "openauth-react/client";
+
+function ApiComponent() {
+  const auth = useAuth();
+
+  async function fetchData() {
+    const token = await auth?.getToken();
+
+    const response = await fetch("/api/protected", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    return response.json();
+  }
+
+  return <button onClick={fetchData}>Fetch Data</button>;
+}
+```
+
+## Provider Props
+
+| Prop                  | Type                             | Required | Default | Description                                            |
+| --------------------- | -------------------------------- | -------- | ------- | ------------------------------------------------------ |
+| `clientID`            | `string`                         | Yes      | -       | OAuth client ID                                        |
+| `issuer`              | `string`                         | Yes      | -       | OpenAuth issuer URL                                    |
+| `callbackRedirectURI` | `string`                         | No       | `/auth` | Callback URI for token exchange                        |
+| `isFrontendCallback`  | `boolean`                        | No       | `false` | Whether callback is handled on frontend (enables PKCE) |
+| `userInfoEndpoint`    | `string`                         | No       | -       | Custom endpoint for fetching user info                 |
+| `userInfoParser`      | `(res: Response) => SessionData` | No       | -       | Custom parser for user info response                   |
+
+## Auth Context
+
+The `useAuth` hook returns the following:
 
 | Property   | Type                                 | Description                                     |
 | ---------- | ------------------------------------ | ----------------------------------------------- |
-| `loaded`   | `boolean`                            | Whether the auth state has been initialized     |
-| `loggedIn` | `boolean`                            | Whether the user is currently authenticated     |
-| `userData` | `unknown`                            | The authenticated user's ID                     |
-| `login`    | `() => Promise<void>`                | Initiates the OAuth login flow                  |
+| `loaded`   | `boolean`                            | Whether auth state has been initialized         |
+| `loggedIn` | `boolean`                            | Whether user is currently authenticated         |
+| `userData` | `SessionData \| undefined`           | User session data from the auth endpoint        |
+| `login`    | `() => Promise<void>`                | Initiates the login flow                        |
 | `logout`   | `() => void`                         | Logs out the user and clears tokens             |
 | `getToken` | `() => Promise<string \| undefined>` | Gets a valid access token (refreshes if needed) |
 
-## Server Usage
+## Extending Session Data
 
-The `AuthManager` class provides server-side authentication handling for API routes.
+Define your own session data type by extending the `SessionData` interface:
 
-### Setup AuthManager
-
-```ts
-import { AuthManager } from "openauth-react/server/endpoint";
-import { createClient } from "@openauthjs/openauth/client";
-import { createSubjects } from "@openauthjs/openauth/subject";
-import { object, string } from "valibot";
-
-const client = createClient({
-  clientID: "your-client-id",
-  issuer: "https://your-auth-server.com",
-});
-
-const subjects = createSubjects({
-  user: object({
-    userID: string(),
-  }),
-});
-
-const authManager = new AuthManager({
-  client,
-  issuer: "https://your-api.com",
-  callback: {
-    onSuccess: (tokens) => {
-      console.log("Login successful");
-    },
-    onError: (error) => {
-      console.error("Login failed", error);
-    },
-  },
-  verify: {
-    subjects,
-    onSuccess: (subject) => {
-      return new Response(subject.subject.properties.userID);
-    },
-    onError: (error) => {
-      return new Response("Unauthorized", { status: 401 });
-    },
-  },
-});
-```
-
-### Handle requests
-
-The `AuthManager` automatically routes requests based on the pathname:
-
-```ts
-// In your server handler (e.g., Bun, Node, Cloudflare Workers)
-export default {
-  fetch(request: Request) {
-    return authManager.run(request);
-  },
-};
-```
-
-### Endpoints
-
-| Path         | Description                                         |
-| ------------ | --------------------------------------------------- |
-| `/authorize` | Initiates the OAuth authorization flow              |
-| `/callback`  | Handles the OAuth callback and sets session cookies |
-| `/`          | Verifies the session and returns the subject        |
-
-## Session Management
-
-The server-side `AuthManager` automatically manages sessions using HttpOnly cookies:
-
-- `access_token` - The OAuth access token
-- `refresh_token` - The OAuth refresh token
-
-Both cookies are set with `HttpOnly`, `SameSite=Strict`, and `Path=/` for security.
-
-## Typescript Extention
-
-TypeSafe session data is very helpful here who it works
-
-### extending the SessionData type
-
-create a `d.ts` file and create an empty export object.
-
-```ts
+```tsx
 // types.d.ts
+import "openauth-react/types";
+
 declare module "openauth-react/types" {
   interface SessionData {
     id: string;
+    email: string;
     name: string;
-    surname: string;
-    username: string;
-    /**
-     * other session data types
-     */
+    avatar?: string;
   }
 }
-// exporting is necessary
+
 export {};
 ```
 
-### Set tsconfig.json
+## Frontend vs Backend Callback
 
-extending the sessionData types adding types
+### Backend Callback (Recommended)
 
-```json
-{
-  "compilerOptions": {
-    "types": ["./types.d.ts"]
-  }
-}
+Use with [openauth-endpoints](https://github.com/shpaw415/openauth-endpoints) for secure server-side token exchange:
+
+```tsx
+<AuthProvider
+  clientID="your-client-id"
+  issuer="https://your-issuer.com"
+  callbackRedirectURI="/auth/callback"
+  isFrontendCallback={false}
+>
 ```
 
-## Requirements
+### Frontend Callback
 
-- React 19+
-- TypeScript 5+
-- @openauthjs/openauth
+Handle the OAuth callback entirely on the client with PKCE:
+
+```tsx
+<AuthProvider
+  clientID="your-client-id"
+  issuer="https://your-issuer.com"
+  callbackRedirectURI="/auth/callback"
+  isFrontendCallback={true}
+>
+```
+
+## Server-Side Integration
+
+Re-export the `AuthManager` from [openauth-endpoints](https://github.com/shpaw415/openauth-endpoints) for convenience:
+
+```typescript
+import { AuthManager } from "openauth-react/endpoint";
+
+const authManager = new AuthManager({
+  client,
+  issuer: "https://your-issuer.com",
+  redirectURI: "https://your-app.com/auth/callback",
+  verify: {
+    subjects,
+    onSuccess: (subject) => {
+      return new Response(JSON.stringify(subject), {
+        headers: { "Content-Type": "application/json" },
+      });
+    },
+  },
+});
+```
+
+## Exports
+
+| Export                    | Description                           |
+| ------------------------- | ------------------------------------- |
+| `openauth-react/client`   | React provider and hooks              |
+| `openauth-react/types`    | TypeScript types                      |
+| `openauth-react/endpoint` | Server-side AuthManager (re-exported) |
 
 ## License
 

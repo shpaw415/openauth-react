@@ -64,7 +64,7 @@ export function AuthProvider({
   async function auth() {
     const token = await refreshTokens();
 
-    if (token) {
+    if (token || !isFrontendCallback) {
       await user();
     }
 
@@ -124,9 +124,11 @@ export function AuthProvider({
 
   async function user() {
     const res = await fetch(userInfoEndpoint ?? callbackRedirectURI, {
-      headers: {
-        Authorization: `Bearer ${token.current}`,
-      },
+      headers: token.current
+        ? {
+            Authorization: `Bearer ${token.current}`,
+          }
+        : undefined,
     });
 
     if (res.ok) {
