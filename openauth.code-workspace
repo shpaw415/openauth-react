@@ -9,6 +9,18 @@
     {
       "path": "../openauth-webui",
     },
+    {
+      "path": "../openauth-webui-shared-types",
+    },
   ],
-  "settings": {},
+  "settings": {
+    "python-envs.pythonProjects": [
+      {
+        "path": "drizzle/migrations",
+        "envManager": "ms-python.python:venv",
+        "packageManager": "ms-python.python:pip",
+        "workspace": "openauth-webui",
+      },
+    ],
+  },
 }

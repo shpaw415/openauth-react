@@ -3,7 +3,11 @@ import { createClient } from "@openauthjs/openauth/client";
 import type { AuthContextType, AuthProviderProps, SessionData } from "./types";
 import Cookies from "js-cookie";
 
-const AuthContext = createContext(null as unknown as AuthContextType);
+declare global {
+  var AuthContext: React.Context<AuthContextType>;
+}
+
+globalThis.AuthContext ??= createContext(null as unknown as AuthContextType);
 
 export function AuthProvider({
   children,
