@@ -1,3 +1,5 @@
+import type { Client } from "@openauthjs/openauth/client";
+
 export type AuthContextType = {
   userData?: SessionData;
   loaded: boolean;
@@ -43,6 +45,12 @@ export type AuthProviderProps = {
    * If not provided, the default session data structure will be used. `res.json()`
    */
   userInfoParser?: (data: Response) => SessionData;
+  /**
+   * Custom OpenAuth Client instance.
+   *
+   * If not provided, a new client will be created using the `clientID` and `issuer`.
+   */
+  custom_client?: Client;
 };
 
 /**

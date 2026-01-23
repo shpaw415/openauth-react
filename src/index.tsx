@@ -17,6 +17,7 @@ export function AuthProvider({
   isFrontendCallback = false,
   userInfoEndpoint,
   userInfoParser,
+  custom_client,
 }: AuthProviderProps) {
   const initializing = useRef(true);
   const [loaded, setLoaded] = useState(false);
@@ -24,10 +25,11 @@ export function AuthProvider({
   const token = useRef<string | undefined>(undefined);
   const [userData, setUserData] = useState<SessionData | undefined>();
   const _client_ = useRef(
-    createClient({
-      clientID,
-      issuer,
-    }),
+    custom_client ??
+      createClient({
+        clientID,
+        issuer,
+      }),
   );
   const client = _client_.current;
 
