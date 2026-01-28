@@ -10,7 +10,7 @@ globalThis.AuthContext ??= createContext(null as unknown as AuthContextType);
 
 export function AuthProvider({
   children,
-  callbackRedirectURI = "/auth",
+  callbackRedirectURI,
   isFrontendCallback = false,
   userInfoEndpoint,
   userInfoParser,
@@ -118,7 +118,7 @@ export function AuthProvider({
   }
 
   async function user() {
-    const res = await fetch(userInfoEndpoint ?? callbackRedirectURI, {
+    const res = await fetch(userInfoEndpoint, {
       headers: token.current
         ? {
             Authorization: `Bearer ${token.current}`,

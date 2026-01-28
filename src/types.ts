@@ -19,10 +19,8 @@ export type AuthProviderProps = {
    * External example: `http://my.api.com/api/auth`
    *
    * Internal example: `/auth`
-   *
-   * @default "/auth"
    */
-  callbackRedirectURI?: string;
+  callbackRedirectURI: string;
   /**
    *  Indicates whether the callback is being handled on the front-end or back-end.
    *
@@ -33,10 +31,8 @@ export type AuthProviderProps = {
   isFrontendCallback?: boolean;
   /**
    * UserInfo endpoint to fetch user information.
-   *
-   * If not provided, the `callbackRedirectURI` URL will be used.
    */
-  userInfoEndpoint?: string;
+  userInfoEndpoint: string;
   /**
    * UserInfo parser function to transform the fetched user information.
    *
@@ -44,9 +40,7 @@ export type AuthProviderProps = {
    */
   userInfoParser?: (data: Response) => SessionData;
   /**
-   * Custom OpenAuth Client instance.
-   *
-   * If not provided, a new client will be created using the `clientID` and `issuer`.
+   * OpenAuth Client instance.
    */
   client: Client;
 };

@@ -15,8 +15,7 @@
   },
   "dependencies": {
     "@openauthjs/openauth": "^0.4.3",
-    "js-cookie": "^3.0.5",
-    "openauth-webui-shared-types": "https://github.com/shpaw415/openauth-webui-shared-types.git"
+    "js-cookie": "^3.0.5"
   },
   "exports": {
     "./client": "./src/index.tsx",
