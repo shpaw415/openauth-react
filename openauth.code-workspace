@@ -4,13 +4,19 @@
       "path": ".",
     },
     {
-      "path": "../../freelance/openauth-web-creation",
+      "path": "../openauth-multitenant-server",
     },
     {
       "path": "../openauth-webui",
     },
     {
       "path": "../openauth-webui-shared-types",
+    },
+    {
+      "path": "../openauth-webui-tester",
+    },
+    {
+      "path": "../openauthster",
     },
   ],
   "settings": {

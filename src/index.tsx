@@ -1,5 +1,4 @@
 import { useRef, useState, useEffect, useContext, createContext } from "react";
-import { createClient } from "@openauthjs/openauth/client";
 import type { AuthContextType, AuthProviderProps, SessionData } from "./types";
 import Cookies from "js-cookie";
 
@@ -11,27 +10,17 @@ globalThis.AuthContext ??= createContext(null as unknown as AuthContextType);
 
 export function AuthProvider({
   children,
-  clientID,
-  issuer,
   callbackRedirectURI = "/auth",
   isFrontendCallback = false,
   userInfoEndpoint,
   userInfoParser,
-  custom_client,
+  client,
 }: AuthProviderProps) {
   const initializing = useRef(true);
   const [loaded, setLoaded] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
   const token = useRef<string | undefined>(undefined);
   const [userData, setUserData] = useState<SessionData | undefined>();
-  const _client_ = useRef(
-    custom_client ??
-      createClient({
-        clientID,
-        issuer,
-      }),
-  );
-  const client = _client_.current;
 
   useEffect(() => {
     const hash = new URLSearchParams(location.search.slice(1));

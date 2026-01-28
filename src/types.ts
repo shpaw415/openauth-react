@@ -11,8 +11,6 @@ export type AuthContextType = {
 
 export type AuthProviderProps = {
   children: React.ReactNode;
-  clientID: string;
-  issuer: string;
   /**
    * The callback redirect URI where it should trigger the token exchange.
    *
@@ -50,7 +48,7 @@ export type AuthProviderProps = {
    *
    * If not provided, a new client will be created using the `clientID` and `issuer`.
    */
-  custom_client?: Client;
+  client: Client;
 };
 
 /**
